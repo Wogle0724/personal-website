@@ -116,30 +116,8 @@
   <footer>
     <p>© 2025 Wyatt Ogle</p>
   </footer>
-  <script>
-    // Simple JS for tab switching
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        this.classList.add('active');
-        document.getElementById(this.dataset.tab).classList.add('active');
-      });
-    });
-  </script>
-  <script>
-    function copyEmail() {
-      const email = "ogle.wyatt28@gmail.com";
-      navigator.clipboard.writeText(email).then(() => {
-        // Show popup
-        const popup = document.getElementById('copy-popup');
-        popup.classList.add('show');
-        setTimeout(() => {
-          popup.classList.remove('show');
-        }, 1200); // 1.2 seconds
-      });
-    }
 
-  </script>
+  <script src="scripts/renderResume.js"></script>
+
 </body>
 </html>
