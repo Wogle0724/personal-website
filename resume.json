@@ -4,6 +4,10 @@
     "phone": "(442) 515-0724",
     "location": "San Diego, CA",
     "linkedin": "https://www.linkedin.com/in/wyattogle28",
+    "description": [
+        "I'm a sophomore at Washington University in St. Louis studying Computer Science & Economics with minors in Finance and Spanish. I'm passionate about learning new things, and using my skills and interests to help others.",
+        "I'm a quick learner who enjoys tackling new challenges—whether that's writing code, leading teams, or exploring emerging tech. Outside the classroom, I love baseball, weightlifting, skiing, and travel."
+      ],
     "education": [
       {
         "school": "Washington University in St. Louis",
@@ -92,56 +96,60 @@
         ]
       }
     ],
-    "projects": [
-      {
-        "name": "Internal AI Agent App",
-        "role": "Full Stack Developer (Lloyd Pest Control)",
-        "tech": ["Ruby on Rails", "PostgreSQL", "DigitalOcean GradientAI"],
-        "bullets": [
-          "Developed a full-stack AI Agent web app integrating DigitalOcean’s GradientAI platform with knowledgebases and function routes.",
-          "Built a chat interface with Markdown streaming, typing animations, and Google Speech-to-Text support.",
-          "Implemented PostgreSQL persistence for chat history to provide users with past conversation logs."
-        ]
-      },
-      {
-        "name": "Event Lead Capture Web App",
-        "role": "Full Stack Developer (Lloyd Pest Control)",
-        "tech": ["Ruby on Rails", "JavaScript", "PostgreSQL", "Sidekiq"],
-        "bullets": [
-          "Designed and deployed a lead capture app to streamline data collection at trade shows.",
-          "Integrated APIs for email validation, address verification, and AI-generated company descriptions.",
-          "Automated entry of captured leads into the company’s CRM (Clypboard)."
-        ]
-      },
-      {
-        "name": "Workday to Google Calendar Converter",
-        "role": "Full Stack Developer",
-        "tech": ["JavaScript", "HTML", "Vercel"],
-        "bullets": [
-          "Built a tool allowing students to upload Workday schedules in XLSX format and convert them into recurring Google Calendar events.",
-          "Implemented Google OAuth authentication for secure access and deployment.",
-          "Published the app publicly on Vercel with full functionality and verification."
-        ]
-      }
-    ],
-    "skills": [
-      "Ruby", "SQL", "HTML", "CSS", "JavaScript", "Python", "Java", "PostgreSQL",
-      "AWS", "Git", "Adobe Illustrator", "Intermediate Spanish"
-    ],
-    "interests": [
-      "Cybersecurity",
-      "Artificial Intelligence",
-      "Hacking",
-      "Computer Science",
-      "Baseball",
-      "Weightlifting",
-      "Skiing",
-      "Travel"
-    ],
-    "groups": [
-      "Alpha Kappa Psi Professional Fraternity",
-      "McKelvey Build Fellowship",
-      "Sigma Alpha Epsilon Fraternity"
-    ]
-  }
-  
+  "projects": [
+    {
+      "name": "Internal AI Agent App",
+      "role": "Full Stack Developer (Lloyd Pest Control)",
+      "tech": ["Ruby on Rails", "PostgreSQL", "DigitalOcean GradientAI"],
+      "bullets": [
+        "Developed a full-stack AI Agent web app integrating DigitalOcean’s GradientAI platform with knowledgebases and function routes.",
+        "Built a chat interface with Markdown streaming, typing animations, and Google Speech-to-Text support.",
+        "Implemented PostgreSQL persistence for chat history to provide users with past conversation logs."
+      ],
+      "img": "images/lloydbot_ss.png",
+      "video": "" 
+    },
+    {
+      "name": "Event Lead Capture Web App",
+      "role": "Full Stack Developer (Lloyd Pest Control)",
+      "tech": ["Ruby on Rails", "JavaScript", "PostgreSQL", "Sidekiq"],
+      "bullets": [
+        "Designed and deployed a lead capture app to streamline data collection at trade shows.",
+        "Integrated APIs for email validation, address verification, and AI-generated company descriptions.",
+        "Automated entry of captured leads into the company’s CRM (Clypboard)."
+      ],
+      "img": "images/event_leads_ss.png",
+      "video": ""
+    },
+    {
+      "name": "Workday to Google Calendar Converter",
+      "role": "Full Stack Developer",
+      "tech": ["JavaScript", "HTML", "Vercel"],
+      "bullets": [
+        "Built a tool allowing students to upload Workday schedules in XLSX format and convert them into recurring Google Calendar events.",
+        "Implemented Google OAuth authentication for secure access and deployment.",
+        "Published the app publicly on Vercel with full functionality and verification."
+      ],
+      "img": "images/converter_ss.png",
+      "video": ""
+    }
+  ],
+
+  "skills": [
+    "Ruby", "SQL", "HTML", "CSS", "JavaScript", "Python", "Java", "PostgreSQL",
+    "AWS", "Git", "Adobe Illustrator", "Intermediate Spanish"
+  ],
+  "interests": [
+    "Cybersecurity", "Artificial Intelligence", "Hacking",
+    "Computer Science", "Baseball", "Weightlifting", "Skiing", "Travel"
+  ],
+  "groups": [
+    "Alpha Kappa Psi Professional Fraternity",
+    "McKelvey Build Fellowship",
+    "Sigma Alpha Epsilon Fraternity"
+  ],
+  "involvement": [
+    "McKelvey Build Fellowship projects",
+    "Hackathons & campus tech clubs"
+  ]
+}

@@ -75,25 +75,22 @@
       </nav>
       <section id="aboutme" class="tab-content active">
         <h2 style="color:var(--primary)">About Me</h2>
-        <p>
-          I'm a sophomore at Washington University in St. Louis studying Computer Science & Economics with minors in Finance and Spanish. I'm passionate about learning new things, and using my skills and interests to help others<br><br>
-          I'm a quick learner who enjoys tackling new challenges—whether that's writing code, leading teams, or exploring emerging tech. Outside the classroom, I love baseball, weightlifting, skiing, and travel.<br><br>
-          <strong>Skills:</strong> Ruby, Java, SQL, JavaScript, HTML, Adobe Illustrator, Google & Microsoft Suite, Intermediate Spanish<br>
-          <strong>Professional Interests:</strong> Artificial Intelligence, Product Management, Cybersecurity, Hacking
-        </p>
+      
+        <!-- dynamic paragraphs go here -->
+        <div id="about-description"></div>
+      
+        <!-- dynamic, prints inline like you have now -->
+        <p><strong>Skills:</strong> <span id="skills-text"></span></p>
+        <p><strong>Interests:</strong> <span id="interests-text"></span></p>
+      
         <h3>Groups & Involvement</h3>
-        <ul>
-          <li>Alpha Kappa Psi Professional Fraternity</li>
-          <li>McKelvey Build Fellowship</li>
-          <li>Sigma Alpha Epsilon Fraternity</li>
-        </ul>
+        <ul id="groups-list"></ul>
       </section>
 
       <section id="education" class="tab-content">
         <div class="timeline" id="education-timeline"></div>
       </section>
-      
-
+    
       <section id="work" class="tab-content">
         <h2 class="subsection-title" style="margin-bottom:-0.6rem;color:var(--primary)">Work Experience</h2>
         <div class="timeline" id="work-timeline"></div>
@@ -101,16 +98,11 @@
         <h2 class="subsection-title" style="margin-top: 1.5rem;margin-bottom:-0.8rem;color:var(--primary)">Leadership & Involvement</h2>
         <div class="timeline" id="leadership-timeline"></div>
       </section>
-      
-      
 
       <section id="projects" class="tab-content">
         <div class="projects-grid" id="projects-grid"></div>
       </section>
       
-      
-
-
     </main>
   </div>
   <footer>
