@@ -114,7 +114,7 @@ document.querySelectorAll('.tab').forEach(tab => {
           <img src="${p.img || 'images/placeholder.png'}" alt="${p.name}">
           <div class="project-overlay">
             <h3>${p.name}</h3>
-            <p>${(p.bullets && p.bullets[0]) || p.description || ''}</p>
+            <p>${p.description || ''}</p>
           </div>
         `;
         a.addEventListener('click', () => renderProjectDetail(p, projArr));
@@ -129,23 +129,26 @@ document.querySelectorAll('.tab').forEach(tab => {
       // Clear the section and render a full-bleed detail view
       section.innerHTML = `
         <div class="project-detail">
-          <button class="back-button" id="back-to-projects" aria-label="Back to projects">
-            <!-- back arrow -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-            <span>Back</span>
-          </button>
-  
           <div class="project-detail-header">
-            <img class="project-detail-image" src="${project.img || 'images/placeholder.png'}" alt="${project.name}">
             <div class="project-detail-meta">
-              <h2>${project.name}</h2>
-              ${project.role ? `<div class="project-role">${project.role}</div>` : ''}
-              ${project.tech?.length ? `<div class="project-tech">Tech: ${project.tech.join(', ')}</div>` : ''}
+                <div class="project-detail-meta-top">
+                    <button class="back-button" id="back-to-projects" aria-label="Back to projects">
+                        <!-- back arrow -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                        <span class="back-btn-line">Back</span>
+                    </button>
+                </div>
+                <div class="project-detail-meta-bottom">
+                <h2>${project.name}</h2>
+                ${project.role ? `<div class="project-role">${project.role}</div>` : ''}
+                ${project.tech?.length ? `<div class="project-tech">Tech: ${project.tech.join(', ')}</div>` : ''}
+                </div>
             </div>
+            <img class="project-detail-image" src="${project.img || 'images/placeholder.png'}" alt="${project.name}">
           </div>
   
           ${project.bullets?.length ? `<div class="project-detail-bullets">${ul(project.bullets).outerHTML}</div>` : ''}

@@ -401,6 +401,7 @@ footer {
   font-size: 1.08rem;
   display: inline-block;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .timeline-card-header h3 {
@@ -419,7 +420,7 @@ footer {
 }
 
 .timeline-card ul li {
-  margin-bottom: 0.35em;
+  margin: 0.8em 0;
 }
 
 @media (max-width: 700px) {
@@ -463,7 +464,7 @@ footer {
 .position-title {
   display: block;
   margin-top: -5px;
-  margin-bottom: 0.4rem;
+  margin-bottom: 1rem;
   font-size: 1.08rem;
   font-weight: 500;
   color: var(--primary);    /* Gold */
@@ -471,70 +472,146 @@ footer {
   letter-spacing: 0.01em;
 }
 
+/* One-card layout for the project detail */
 .project-detail {
-  position: relative;
+  background: var(--contact-card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 18px;
   display: grid;
-  gap: 1rem;
+  gap: 16px;
 }
 
-.back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: none;
+/* Make inner sections transparent so it reads as one card */
+.project-detail-header,
+.project-detail-bullets,
+.project-detail-demo {
   background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Soft separators between sections (not after the last one) */
+.project-detail > .project-detail-header,
+.project-detail > .project-detail-bullets {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.project-detail > .project-detail-demo { padding-top: 4px; }
+
+/* Compact, subtle back button (doesn't span) */
+.back-button {
+  width: 90px;
+  align-self: start;           /* keep it small on the left */
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(245,176,65,0.25);
+  background: transparent;     /* no filled chip */
+  color: var(--text);
   cursor: pointer;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.back-button .back-btn-line{
+  margin-top: 2.5px;
+}
+.back-button svg { stroke: var(--primary); }
+.back-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245,176,65,0.45);
+  background: #181824;
+  box-shadow: 0 6px 22px rgba(245,176,65,0.10);
+}
+.back-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245,176,65,0.22);
 }
 
+/* Keep header layout + polish image inside the single card */
 .project-detail-header {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
   align-items: start;
 }
 @media (max-width: 900px) {
-  .project-detail-header {
-    grid-template-columns: 1fr;
-  }
+  .project-detail-header { grid-template-columns: 1fr; }
 }
 
 .project-detail-image {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  max-height: 300px;
   object-fit: cover;
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 
 .project-detail-meta h2 {
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 4px 0;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem); /* scales with viewport */
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 6px #18182470;
+  text-wrap: balance;  /* balance lines for aesthetics */
 }
-.project-role { opacity: 0.9; margin-bottom: 0.25rem; }
-.project-tech { opacity: 0.8; font-size: 0.95rem; }
 
-.project-detail-bullets ul {
-  margin: 0.5rem 0 0 1rem;
-  list-style: disc;
+.project-detail-meta{
+  display: grid;
+  grid-template-rows: auto 1fr; /* top row, spacer row, bottom row */
+  gap: 16px;  
 }
 
-.project-detail-demo h3 { margin-top: 0.25rem; }
-.video-embed {
+.project-detail-meta-top {
+  display: flex;       /* so back button can align nicely */
+  justify-content: flex-start;
+  align-items: center;
+  align-self: start;   /* stick to top */
+}
+
+.project-detail-meta-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;            /* spacing between h2, role, tech, etc. */
+  align-self: end;     /* stick to bottom */
   position: relative;
-  width: 100%;
-  max-width: 900px;
-  aspect-ratio: 16 / 9;
+  bottom: 0;
 }
-.video-embed iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 12px;
+
+.project-role { opacity: 0.92; color: var(--text); margin-bottom: 6px; }
+.project-tech { opacity: 0.9; color: var(--dim-text); font-size: 1rem; }
+
+/* Bullets & demo content harmonized */
+.project-detail-bullets ul {
+  margin: 6px 0 0 1rem;
+  padding: 0;
+  list-style: disc;
+  color: var(--text);
 }
+.project-detail-bullets li { margin: 6px 0; }
+
+.project-detail-demo h3 {
+  margin: 2px 0 10px 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+/* Video container matches the single-card vibe without extra card chrome */
+.video-embed,
 .video-placeholder {
-  opacity: 0.7;
-  padding: 1rem;
-  border: 1px dashed var(--muted, #cbd5e1);
-  border-radius: 12px;
-  max-width: 900px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--border);
+  background: #0f0f16;
 }
+.video-embed { aspect-ratio: 16 / 9; max-width: 900px; }
+.video-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+.video-placeholder { opacity: 0.85; padding: 18px; color: var(--dim-text); max-width: 900px; }

@@ -101,6 +101,7 @@
       "name": "Internal AI Agent App",
       "role": "Full Stack Developer (Lloyd Pest Control)",
       "tech": ["Ruby on Rails", "PostgreSQL", "DigitalOcean GradientAI"],
+      "description": "Custom AI Agent for internal use at Lloyd Pest Control",
       "bullets": [
         "Developed a full-stack AI Agent web app integrating DigitalOcean’s GradientAI platform with knowledgebases and function routes.",
         "Built a chat interface with Markdown streaming, typing animations, and Google Speech-to-Text support.",
@@ -113,6 +114,7 @@
       "name": "Event Lead Capture Web App",
       "role": "Full Stack Developer (Lloyd Pest Control)",
       "tech": ["Ruby on Rails", "JavaScript", "PostgreSQL", "Sidekiq"],
+      "description": "Web app to streamline trade show lead capture",
       "bullets": [
         "Designed and deployed a lead capture app to streamline data collection at trade shows.",
         "Integrated APIs for email validation, address verification, and AI-generated company descriptions.",
@@ -125,6 +127,7 @@
       "name": "Workday to Google Calendar Converter",
       "role": "Full Stack Developer",
       "tech": ["JavaScript", "HTML", "Vercel"],
+      "description": "Web app for student use to input class schedules",
       "bullets": [
         "Built a tool allowing students to upload Workday schedules in XLSX format and convert them into recurring Google Calendar events.",
         "Implemented Google OAuth authentication for secure access and deployment.",
@@ -140,16 +143,14 @@
     "AWS", "Git", "Adobe Illustrator", "Intermediate Spanish"
   ],
   "interests": [
-    "Cybersecurity", "Artificial Intelligence", "Hacking",
-    "Computer Science", "Baseball", "Weightlifting", "Skiing", "Travel"
+    "Cybersecurity", "Artificial Intelligence", "Computer Science", "Baseball", "Weightlifting", "Skiing", "Travel"
   ],
   "groups": [
     "Alpha Kappa Psi Professional Fraternity",
     "McKelvey Build Fellowship",
-    "Sigma Alpha Epsilon Fraternity"
-  ],
-  "involvement": [
-    "McKelvey Build Fellowship projects",
-    "Hackathons & campus tech clubs"
+    "Sigma Alpha Epsilon Fraternity",
+    "Intramural Softball",
+    "Spikeball Club",
+    "Brazilian Jiu Jitsu Club"
   ]
 }
