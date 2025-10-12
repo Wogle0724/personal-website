@@ -421,6 +421,11 @@ footer {
   margin-bottom: 0.7rem;
 }
 
+.timeline-card li > b,
+.timeline-card p > b {
+  color: var(--secondary);
+}
+
 .timeline-pill {
   margin-left: auto; /* For fallback */
   background: rgba(245,176,65,0.14);
@@ -652,7 +657,7 @@ footer {
 /* ===== About Me layout ===== */
 #aboutme .about-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;  /* overview wide, details narrow */
+  grid-template-columns: 1fr 1fr;  /* overview wide, details narrow */
   gap: 16px 24px;
   margin-top: 8px;
 }
