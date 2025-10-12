@@ -10,7 +10,7 @@
       ],
     "education": [
       {
-        "school": "Washington University in St. Louis",
+        "school": "Washington University in St. Louis – St. Louis, MO",
         "degree": "BS in Computer Science & Economics",
         "minors": ["Finance", "Spanish"],
         "years": "2024 - 2028 (expected)",
@@ -25,14 +25,32 @@
         ]
       },
       {
-        "school": "Pacific Ridge School, Carlsbad, CA",
+        "school": "Pacific Ridge School – Carlsbad, CA",
         "degree": "High School Diploma",
         "years": "2017 - 2024",
         "gpa": "4.46",
-        "sat": "1540"
+        "sat": "1540",
+        "coursework": [
+          "AP Physics C: Mechanics - 5 on AP Exam",
+          "AP Calculus BC - 5 on AP Exam",
+          "AP English Language & Composition - 5 on AP Exam",
+          "AP English Literature - 4 on AP Exam",
+          "AP US History - 4 on AP Exam",
+          "AP Spanish Language & Culture - 4 on AP Exam",
+          "Differential Equations"
+        ]
       }
     ],
     "experience": [
+      {
+        "title": "Software Engineering Intern",
+        "company": "Rottler Pest Solutions",
+        "years": "Aug 2025 - Present",
+        "bullets": [
+          "Working part time to develop scripts, projects, and reports to improve operations and efficiency.",
+          "Specializing in Ruby on Rails and SQL development, built several internal tools and dashboards."
+        ]
+      },
       {
         "title": "IT Intern",
         "company": "Lloyd Pest Control",
@@ -65,6 +83,24 @@
       }
     ],
     "leadership": [
+      {
+        "role": "Recruitment Chairman",
+        "organization": "Sigma Alpha Epsilon Fraternity",
+        "years": "Aug 2025 – Present",
+        "bullets": [
+          "Selected as one of three recruitment chairmen to lead fraternity recruitment efforts.",
+          "Led conversations and introductions for over 80 potential new members to introduce them to members of the fraternity"
+        ]
+      },
+      {
+        "role": "Rush Committee",
+        "organization": "Alpha Kappa Psi Professional Fraternity",
+        "years": "Aug 2025 – Sep 2025",
+        "bullets": [
+          "Helped organize, manage, and set up recruitment events for my professional business fraternity.",
+          "Managed over 200 potential new members both during events and outside of events."
+        ]
+      },
       {
         "role": "Board of Directors",
         "organization": "Firebird Fund",

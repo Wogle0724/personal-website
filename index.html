@@ -75,19 +75,36 @@
       </nav>
       <section id="aboutme" class="tab-content active">
         <h2 style="color:var(--primary)">About Me</h2>
-      
-        <!-- dynamic paragraphs go here -->
-        <div id="about-description"></div>
-      
-        <!-- dynamic, prints inline like you have now -->
-        <p><strong>Skills:</strong> <span id="skills-text"></span></p>
-        <p><strong>Interests:</strong> <span id="interests-text"></span></p>
-      
-        <h3>Groups & Involvement</h3>
-        <ul id="groups-list"></ul>
+
+        <div class="about-grid">
+          <!-- Overview -->
+          <div class="about-card about-overview">
+            <h3 class="subsection-subtitle">Overview</h3>
+            <div id="about-description"></div>
+          </div>
+
+          <!-- Skills -->
+          <div class="about-card">
+            <h3 class="subsection-subtitle">Skills</h3>
+            <p><span id="skills-text"></span></p>
+          </div>
+
+          <!-- Interests -->
+          <div class="about-card">
+            <h3 class="subsection-subtitle">Interests</h3>
+            <p><span id="interests-text"></span></p>
+          </div>
+
+          <!-- Groups & Involvement -->
+          <div class="about-card about-groups">
+            <h3 class="subsection-subtitle">Groups &amp; Involvement</h3>
+            <ul id="groups-list"></ul>
+          </div>
+        </div>
       </section>
 
       <section id="education" class="tab-content">
+        <h2 class="subsection-title" style="margin-bottom:-0.6rem;color:var(--primary)">Education</h2>
         <div class="timeline" id="education-timeline"></div>
       </section>
     
@@ -100,6 +117,7 @@
       </section>
 
       <section id="projects" class="tab-content">
+        <h2 class="subsection-title" style="margin-bottom:-0.6rem;color:var(--primary)">Projects</h2>
         <div class="projects-grid" id="projects-grid"></div>
       </section>
       

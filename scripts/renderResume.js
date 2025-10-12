@@ -32,7 +32,12 @@ document.querySelectorAll('.tab').forEach(tab => {
       const txt = document.getElementById(id.replace('-link','-text'));
       if (txt) txt.textContent = textOverride || href.replace(/^https?:\/\//,'');
     };
-    const li = (t) => { const el = document.createElement('li'); el.textContent = t; return el; };
+    const li = (t) => {
+      const el = document.createElement('li');
+      if (t instanceof Node) el.appendChild(t);
+      else el.innerHTML = t; // allow <b>Relevant Coursework:</b> to render
+      return el;
+    };
     const ul = (items=[]) => { const u = document.createElement('ul'); items.forEach(i => u.appendChild(li(i))); return u; };
   
     const makeTimelineCard = ({ title, pill, subtitle, bullets }) => {
@@ -49,7 +54,16 @@ document.querySelectorAll('.tab').forEach(tab => {
         </div>
       `;
       const content = card.querySelector('.timeline-card-content');
-      if (bullets && bullets.length) content.appendChild(ul(bullets));
+      if (bullets && bullets.length) {
+        // If there's only one string containing HTML with its own structure, inject it directly (no extra <ul>)
+        if (bullets.length === 1 && typeof bullets[0] === 'string' && bullets[0].includes('<p')) {
+          const wrapper = document.createElement('div');
+          wrapper.innerHTML = bullets[0];
+          content.appendChild(wrapper);
+        } else {
+          content.appendChild(ul(bullets));
+        }
+      }
       return card;
     };
   
@@ -58,17 +72,21 @@ document.querySelectorAll('.tab').forEach(tab => {
       if (!mount) return;
       mount.innerHTML = '';
       eduArr.forEach(e => {
-        const bullets = [];
-        if (e.degree) bullets.push(e.degree + (e.minors?.length ? `; Minors: ${e.minors.join(', ')}` : ''));
-        if (e.gpa) bullets.push(`GPA: ${e.gpa}`);
-        if (e.coursework?.length) bullets.push(`Relevant Coursework: ${e.coursework.join(', ')}`);
-        if (e.years) bullets.push(`Years: ${e.years}`);
-        mount.appendChild(makeTimelineCard({
+        let html = '';
+        if (e.degree) html += `<p><b>Degree:</b> ${e.degree}${e.minors?.length ? `<br><b>Minors:</b> ${e.minors.join(', ')}` : ''}</p>`;
+        if (e.gpa) html += `<p><b>GPA:</b> ${e.gpa}</p>`;
+        if (e.sat) html += `<p><b>SAT:</b> ${e.sat}</p>`;
+        if (e.coursework?.length) {
+          html += `<p><b>Relevant Coursework:</b></p><ul>${e.coursework.map(c => `<li>${c}</li>`).join('')}</ul>`;
+        }
+
+        const card = makeTimelineCard({
           title: e.school,
           pill: e.years || '',
           subtitle: '',
-          bullets
-        }));
+          bullets: [html] // keep structure consistent with existing card builder
+        });
+        mount.appendChild(card);
       });
     };
   
@@ -264,4 +282,3 @@ document.querySelectorAll('.tab').forEach(tab => {
       });
     };
   })();
-  

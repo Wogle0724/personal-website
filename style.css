@@ -274,62 +274,92 @@ footer {
   }
 }
 
-/* Projects Grid */
+/* Projects Grid — match timeline card vibe */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  margin-top: 2rem;
+  gap: 22px;                /* tighter like timeline spacing */
+  margin-top: 1.5rem;       /* align with other sections */
 }
+
 .project-card {
   position: relative;
   display: block;
-  border-radius: 18px;
+  border-radius: 22px;                      /* match .timeline-card radius */
+  background: var(--contact-card-bg);       /* same card background */
+  border: 1.5px solid var(--border);        /* same subtle outline */
+  box-shadow: var(--shadow);
   overflow: hidden;
-  min-height: 260px;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  background: #161622;
-}
-.project-card:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 0 30px rgba(245, 176, 65, 0.19);
-}
-.project-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.project-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0; right: 0;
-  background: linear-gradient(0deg, rgba(21, 21, 21, 0.9) 55%, transparent 100%);
-  color: rgba(245, 176, 65, 0.9); /* Adjust the alpha value for transparency */
-  padding: 90px 18px 14px 18px;
-  transition: background 0.18s;
-}
-.project-overlay h3 {
-  margin: 0 0 6px 0;
-  font-size: 1.18rem;
-  font-weight: 700;
-  color: var(--primary);
-  text-shadow: 0 2px 6px #18182470;
-}
-.project-overlay p {
-  margin: 0;
-  font-size: 1rem;
-  opacity: 0.91;
-  color: var(--secondary);
-  margin-bottom: 2px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
 
-/* Responsive */
+/* keep the lift small like other components */
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(245,176,65,0.12);
+  border-color: rgba(245,176,65,0.35);
+}
+
+/* image keeps consistent ratio and rounded corners inside the card */
+.project-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;     /* consistent tile height */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border);
+}
+
+/* turn overlay into a neat caption bar instead of full gradient */
+.project-overlay {
+  position: static;         /* sit as a normal caption block */
+  background: transparent;
+  padding: 12px 14px 14px 14px;
+}
+
+.project-overlay h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-shadow: none;        /* match timeline text look */
+  letter-spacing: 0.01em;
+}
+
+.project-overlay p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--dim-text);   /* match secondary text tone */
+  opacity: 1;
+}
+
+/* Keyboard focus like other subtle buttons */
+.project-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245,176,65,0.22);
+}
+
+/* Responsive: single column on small screens */
 @media (max-width: 800px) {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Remove default link underline for project tiles */
+.project-card,
+.project-card:link,
+.project-card:visited,
+.project-card:hover,
+.project-card:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make sure inner text never gets underlined on hover */
+.project-card h3,
+.project-card p {
+  text-decoration: none;
 }
 
 /* Timeline */
@@ -420,7 +450,9 @@ footer {
 }
 
 .timeline-card ul li {
-  margin: 0.8em 0;
+  margin: 0.6em 0;
+  line-height: 1.5;
+  list-style-type: disc;
 }
 
 @media (max-width: 700px) {
@@ -615,3 +647,71 @@ footer {
 .video-embed { aspect-ratio: 16 / 9; max-width: 900px; }
 .video-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 .video-placeholder { opacity: 0.85; padding: 18px; color: var(--dim-text); max-width: 900px; }
+
+
+/* ===== About Me layout ===== */
+#aboutme .about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;  /* overview wide, details narrow */
+  gap: 16px 24px;
+  margin-top: 8px;
+}
+#aboutme .about-card {
+  background: var(--contact-card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+#aboutme .about-card h3.subsection-subtitle {
+  margin: 0 0 8px 0;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* Make the overview span the row; its paragraphs can sit in 2 cols */
+#aboutme .about-overview {
+  grid-column: 1 / -1; /* full width top row */
+}
+#about-description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+}
+
+/* Groups card can stretch if needed */
+#aboutme .about-groups {
+  grid-column: 1 / -1; /* full width bottom row on desktop */
+}
+
+/* Groups list spacing */
+#groups-list {
+  margin: 6px 0 0 1rem;
+  padding: 0;
+  list-style: disc;
+}
+#groups-list li { margin: 4px 0; line-height: 1.4; }
+
+/* Inline label alignment for Skills/Interests */
+#aboutme p {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+#aboutme p strong {
+  display: inline-block;
+  min-width: 90px; /* label width for Skills/Interests */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  #aboutme .about-grid {
+    grid-template-columns: 1fr; /* stack */
+  }
+  #about-description {
+    grid-template-columns: 1fr; /* paragraphs stack */
+  }
+  #aboutme .about-groups {
+    grid-column: auto;
+  }
+}
