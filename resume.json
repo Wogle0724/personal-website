@@ -1,7 +1,7 @@
 {
     "name": "Wyatt Ogle",
-    "email": "ogle.wyatt28@gmail.com",
-    "phone": "(442) 515-0724",
+    "email": "o.wyatt@washu.edu",
+    "phone": "442-515-0724",
     "location": "San Diego, CA",
     "linkedin": "https://www.linkedin.com/in/wyattogle28",
     "description": [
@@ -11,10 +11,10 @@
     "education": [
       {
         "school": "Washington University in St. Louis – St. Louis, MO",
-        "degree": "BS in Computer Science & Economics",
+        "degree": "Bachelor of Science in Computer Science + Economics",
         "minors": ["Finance", "Spanish"],
-        "years": "2024 - 2028 (expected)",
-        "gpa": "3.92 (Dean’s List)",
+        "years": "Aug. 2024 – May 2028",
+        "gpa": "3.92/4.00",
         "coursework": [
           "Rapid Prototype Development and Creative Programming",
           "Data Structures & Algorithms",
@@ -52,9 +52,10 @@
         ]
       },
       {
-        "title": "IT Intern",
+        "title": "Information Technology Intern",
         "company": "Lloyd Pest Control",
-        "years": "May 2025 - Aug 2025",
+        "location": "San Diego, CA",
+        "years": "May 2025 – August 2025",
         "bullets": [
           "Cultivated proficiency in Ruby, SQL, HTML, and other technologies through hands-on development.",
           "Built 15+ projects and scripts including report generators, data analysis tools, and automation for sales and operations.",
@@ -64,7 +65,8 @@
       {
         "title": "English Tutor",
         "company": "Ringle",
-        "years": "Feb 2025 - May 2025",
+        "location": "Remote",
+        "years": "February 2025 – May 2025",
         "bullets": [
           "Provided one-on-one English tutoring to non-native speakers from South Korea.",
           "Focused on improving conversation skills, grammar, and professional communication.",
@@ -88,8 +90,8 @@
         "organization": "Sigma Alpha Epsilon Fraternity",
         "years": "Aug 2025 – Present",
         "bullets": [
-          "Selected as one of three recruitment chairmen to lead fraternity recruitment efforts.",
-          "Led conversations and introductions for over 80 potential new members to introduce them to members of the fraternity"
+          "Spearheaded an initiative to increase our recruitment budget by meeting and setting up calls with our Housing Corporation Treasurer and organizing a professional pitch deck resulting in $7,000 of additional funding.",
+          "Organized and planned initiatives and events to maximize recruitment yield for the 2025-26 recruitment cycle."
         ]
       },
       {
@@ -102,12 +104,12 @@
         ]
       },
       {
-        "role": "Board of Directors",
+        "role": "Investment Board Chairman",
         "organization": "Firebird Fund",
-        "years": "Aug 2023 – Jun 2024",
+        "years": "August 2023 – June 2024",
         "bullets": [
-          "Selected as one of six senior directors on the governing Board of Directors.",
-          "Managed a $10,000 stock portfolio, achieving a 10% annual return through market analysis.",
+          "Selected as one of six senior directors on the governing Board of Directors for the Firebird Fund.",
+          "Managed a $10,000 stock portfolio for Pacific Ridge School, earning a 10% annual return through market analysis.",
           "Collaborated with other board members to make strategic investment decisions."
         ]
       },
@@ -162,12 +164,11 @@
     {
       "name": "Workday to Google Calendar Converter",
       "role": "Full Stack Developer",
-      "tech": ["JavaScript", "HTML", "Vercel"],
+      "tech": ["JavaScript", "HTML", "Vercel", "Git"],
       "description": "Web app for student use to input class schedules",
       "bullets": [
-        "Built a tool allowing students to upload Workday schedules in XLSX format and convert them into recurring Google Calendar events.",
-        "Implemented Google OAuth authentication for secure access and deployment.",
-        "Published the app publicly on Vercel with full functionality and verification."
+        "Developed a web app for students that allows users to upload their class schedule in xlsx format from Workday and automatically creates and imports a recurring schedule into Google Calendar.",
+        "Received Google Oauth verification allowing the fully functioning app to be deployed and public on the web."
       ],
       "img": "images/converter_ss.png",
       "video": ""
@@ -175,11 +176,12 @@
   ],
 
   "skills": [
-    "Ruby", "SQL", "HTML", "CSS", "JavaScript", "Python", "Java", "PostgreSQL",
-    "AWS", "Git", "Adobe Illustrator", "Intermediate Spanish"
+    "Java", "Python", "Ruby", "JavaScript", "SQL (Postgres)", "HTML/CSS", "Git", "Vercel", "VS Code",
+    "PostgreSQL", "AWS", "Adobe Illustrator", "Intermediate Spanish"
   ],
   "interests": [
-    "Cybersecurity", "Artificial Intelligence", "Computer Science", "Baseball", "Weightlifting", "Skiing", "Travel"
+    "Cybersecurity", "Artificial Intelligence (AI)", "Web Dev", "Blockchain", "AWS", "Hacking", "Computer Science",
+    "Baseball", "Weightlifting", "Skiing", "Brazilian Jiu Jitsu", "Travel", "Graphic Design", "Film", "Journaling"
   ],
   "groups": [
     "Alpha Kappa Psi Professional Fraternity",
