@@ -8,6 +8,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <nav class="tabs">
+        <button class="tab active" type="button" data-tab="aboutme">About Me</button>
+        <button class="tab" type="button" data-tab="education">Education</button>
+        <button class="tab" type="button" data-tab="work">Experience</button>
+        <button class="tab" type="button" data-tab="projects">Projects</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="content-mask-wrap">
   <section class="hero" id="hero">
     <div class="hero-inner">
       <h1 class="hero-title" id="hero-title">Hello</h1>
@@ -17,17 +29,6 @@
   </section>
 
   <div class="page-shell">
-    <header class="topbar" id="topbar">
-      <div class="topbar-inner">
-        <nav class="tabs">
-          <button class="tab active" type="button" data-tab="aboutme">About Me</button>
-          <button class="tab" type="button" data-tab="education">Education</button>
-          <button class="tab" type="button" data-tab="work">Experience</button>
-          <button class="tab" type="button" data-tab="projects">Projects</button>
-        </nav>
-      </div>
-    </header>
-
     <div class="container content-shell">
       <aside class="profile">
         <img src="images/your-headshot.jpg" class="profile-pic" alt="Wyatt Ogle headshot">
@@ -125,6 +126,7 @@
   <footer>
     <p>© 2025 Wyatt Ogle</p>
   </footer>
+  </div>
 
   <script src="scripts/renderResume.js" defer></script>
   <script src="scripts/uiInteractions.js" defer></script>

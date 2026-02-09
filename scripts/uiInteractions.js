@@ -1,3 +1,8 @@
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 const tabs = Array.from(document.querySelectorAll('.tab'));
 const tabContents = Array.from(document.querySelectorAll('.tab-content'));
 
@@ -39,10 +44,12 @@ let ticking = false;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-const updateHeroText = (scrollY) => {
-  const heroOut = scrollY >= heroHeight;
+const updateHeroText = () => {
+  if (!hero) return;
+  const rect = hero.getBoundingClientRect();
+  const heroOut = rect.bottom < 0;
   if (heroTitle) {
-    heroTitle.textContent = heroOut ? 'Hello Again' : 'Hello';
+    heroTitle.textContent = heroOut ? 'Hello again' : 'Hello';
   }
   if (heroSubtitle) {
     heroSubtitle.textContent = heroOut ? 'Back so soon?' : "I'm Wyatt";
@@ -72,13 +79,13 @@ const updateScrollDrivenUI = () => {
 
   if (topbar) {
     const topbarShift = -140 + (140 * progress);
-    topbar.style.transform = `translate(-50%, ${topbarShift}%)`;
+    topbar.style.transform = `translateY(${topbarShift}%)`;
     topbar.style.opacity = progress.toFixed(3);
     topbar.style.pointerEvents = progress > 0.1 ? 'auto' : 'none';
   }
 
   document.body.classList.toggle('scrolled', progress >= 1);
-  updateHeroText(scrollY);
+  updateHeroText();
 };
 
 const scheduleHint = () => {
