@@ -1,24 +1,4 @@
-// Simple JS for tab switching
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      this.classList.add('active');
-      document.getElementById(this.dataset.tab).classList.add('active');
-    });
-  });
-  
-  // redefine global copyEmail with dynamic email (kept)
-  window.copyEmail = function () {
-    const email = (window.__resumeData && window.__resumeData.email) || "ogle.wyatt28@gmail.com";
-    navigator.clipboard.writeText(email).then(() => {
-      const popup = document.getElementById('copy-popup');
-      popup.classList.add('show');
-      setTimeout(() => popup.classList.remove('show'), 1200);
-    });
-  };
-  
-  (async function () {
+(async function () {
     const $ = (sel, root=document) => root.querySelector(sel);
     const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
   
@@ -27,7 +7,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     const setLink = (id, href, textOverride) => {
       const el = document.getElementById(id);
       if (!el) return;
-      if (!href) { el.style.display = 'none'; return; }
+      if (!href) { return; }
       el.href = href;
       const txt = document.getElementById(id.replace('-link','-text'));
       if (txt) txt.textContent = textOverride || href.replace(/^https?:\/\//,'');
@@ -261,8 +241,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     // Optional: derive subtitle from first education
     if (data.education?.length) {
       const uni = data.education[0];
-      const subtitle = `${uni.school.includes('Washington University') ? 'WashU' : uni.school}${uni.degree ? ' — ' + uni.degree : ''}`.trim();
-      setText('subtitle-badge', subtitle);
     }
   
     // Sections
@@ -272,13 +250,4 @@ document.querySelectorAll('.tab').forEach(tab => {
     renderProjects(data.projects);
     renderAbout(data);
   
-    // Update copyEmail to use dynamic email
-    window.copyEmail = function () {
-      const email = (data && data.email) || "ogle.wyatt28@gmail.com";
-      navigator.clipboard.writeText(email).then(() => {
-        const popup = document.getElementById('copy-popup');
-        popup.classList.add('show');
-        setTimeout(() => popup.classList.remove('show'), 1200);
-      });
-    };
   })();

@@ -16,6 +16,7 @@
         "years": "Aug. 2024 – May 2028",
         "gpa": "3.92/4.00",
         "coursework": [
+          "Object-Oriented Software Development Lab",
           "Rapid Prototype Development and Creative Programming",
           "Data Structures & Algorithms",
           "Logic & Discrete Math",
@@ -43,12 +44,14 @@
     ],
     "experience": [
       {
-        "title": "Software Engineering Intern",
+        "title": "Software Development Intern",
         "company": "Rottler Pest Solutions",
+        "location": "St. Louis, MO",
         "years": "Aug 2025 - Present",
         "bullets": [
           "Working part time to develop scripts, projects, and reports to improve operations and efficiency.",
-          "Specializing in Ruby on Rails and SQL development, built several internal tools and dashboards."
+          "Specializing in Ruby on Rails and SQL development, built several internal tools and dashboards.",
+          "Utilized APIs and databases to develop scripts that sync internal systems to improve marketing operational efficiency."
         ]
       },
       {
@@ -57,8 +60,8 @@
         "location": "San Diego, CA",
         "years": "May 2025 – August 2025",
         "bullets": [
-          "Cultivated proficiency in Ruby, SQL, HTML, and other technologies through hands-on development.",
-          "Built 15+ projects and scripts including report generators, data analysis tools, and automation for sales and operations.",
+          "Cultivated proficiency in Ruby, SQL, HTML, and other technologies through self-directed study and hands-on development while juggling many tasks and adapting to challenges.",
+          "Built 15+ projects and scripts including full stack internal tools, report generators, and data analyzers to improve workflow efficiency and data accuracy.",
           "Performed daily IT operations monitoring firewalls, servers, and cloud systems."
         ]
       },
@@ -90,8 +93,8 @@
         "organization": "Sigma Alpha Epsilon Fraternity",
         "years": "Aug 2025 – Present",
         "bullets": [
-          "Spearheaded an initiative to increase our recruitment budget by meeting and setting up calls with our Housing Corporation Treasurer and organizing a professional pitch deck resulting in $7,000 of additional funding.",
-          "Organized and planned initiatives and events to maximize recruitment yield for the 2025-26 recruitment cycle.",
+          "Spearheaded an initiative to increase our recruitment budget by meeting and setting up calls with a National Housing Corporation Treasurer and organizing a professional pitch deck resulting in $7,000 of additional funding.",
+          "Organized events and initiated introductions between 200+ potential new members and active members to maximize recruitment yield for the 2025-26 recruitment cycle.",
           "Led conversations with 100+ potential new members throughout the recruitment process"
         ]
       },
@@ -109,7 +112,7 @@
         "organization": "Firebird Fund",
         "years": "August 2023 – June 2024",
         "bullets": [
-          "Selected as one of six senior directors on the governing Board of Directors for the Firebird Fund.",
+          "Acted as one of six senior directors on the governing Board of Directors for the Firebird Fund.",
           "Managed a $10,000 stock portfolio for Pacific Ridge School, earning a 10% annual return through market analysis.",
           "Collaborated with other board members to make strategic investment decisions."
         ]
@@ -142,8 +145,8 @@
       "tech": ["Ruby on Rails", "PostgreSQL", "DigitalOcean GradientAI"],
       "description": "Custom AI Agent for internal use at Lloyd Pest Control",
       "bullets": [
-        "Developed a full-stack AI Agent web app integrating DigitalOcean’s GradientAI platform with knowledgebases and function routes.",
-        "Built a chat interface with Markdown streaming, typing animations, and Google Speech-to-Text support.",
+        "Developed a full-stack AI Agent web app integrating DigitalOcean's GradientAI platform with knowledgebases, function routes, and configurable settings to tailor responses to company workflows.",
+        "Built a contemporary chat interface with Markdown streaming, typing animations, and Google Speech-to-Text support for hands-free interactions.",
         "Implemented PostgreSQL persistence for chat history to provide users with past conversation logs."
       ],
       "img": "images/lloydbot_ss.png",
@@ -155,9 +158,9 @@
       "tech": ["Ruby on Rails", "JavaScript", "PostgreSQL", "Sidekiq"],
       "description": "Web app to streamline trade show lead capture",
       "bullets": [
-        "Designed and deployed a lead capture app to streamline data collection at trade shows.",
+        "Developed, tested, and deployed a lead capture app to streamline data collection at trade shows, increasing client interaction by 50%.",
         "Integrated APIs for email validation, address verification, and AI-generated company descriptions.",
-        "Automated entry of captured leads into the company’s CRM (Clypboard)."
+        "Automated entry of captured leads into the company's internal system (Clypboard)."
       ],
       "img": "images/event_leads_ss.png",
       "video": ""
@@ -169,7 +172,7 @@
       "description": "Web app for student use to input class schedules",
       "bullets": [
         "Developed a web app for students that allows users to upload their class schedule in xlsx format from Workday and automatically creates and imports a recurring schedule into Google Calendar.",
-        "Received Google Oauth verification allowing the fully functioning app to be deployed and public on the web."
+        "Implemented Google OAuth authentication and deployed the app to Vercel, supporting 180+ active users."
       ],
       "img": "images/converter_ss.png",
       "video": ""
@@ -178,10 +181,10 @@
 
   "skills": [
     "Java", "Python", "Ruby", "JavaScript", "SQL (Postgres)", "HTML/CSS", "Git", "Vercel", "VS Code",
-    "PostgreSQL", "AWS", "Adobe Illustrator", "Intermediate Spanish"
+    "PostgreSQL", "AWS", "Adobe Illustrator", "Intermediate Spanish", "React", "Next.js", "G-Suite"
   ],
   "interests": [
-    "Cybersecurity", "Artificial Intelligence (AI)", "Web Dev", "Blockchain", "AWS", "Hacking", "Computer Science",
+    "Cybersecurity", "Machine Learning", "Artificial Intelligence (AI)", "Web Dev", "Blockchain", "Cloud Computing (AWS)", "Hacking", "Computer Science",
     "Baseball", "Weightlifting", "Skiing", "Brazilian Jiu Jitsu", "Travel", "Graphic Design", "Film", "Journaling"
   ],
   "groups": [
