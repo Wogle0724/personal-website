@@ -388,6 +388,10 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 900px) {
+  :root {
+    --topbar-height: 78px;
+    --topbar-mask-height: 100px;
+  }
   .container {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -407,16 +411,19 @@ footer {
   }
   .topbar-inner {
     border-radius: 0;
-    padding: 10px var(--content-pad);
+    padding: 18px var(--content-pad) 12px;
   }
   .tabs {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 10px 16px;
   }
   .tab {
-    padding: 8px 16px;
+    padding: 8px 12px;
     font-size: 0.95rem;
+    width: 100%;
+    max-width: 140px;
   }
   .profile-pic {
     width: 90px;
