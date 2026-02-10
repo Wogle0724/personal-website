@@ -123,9 +123,14 @@
     const renderProjectDetail = (project, allProjects) => {
       const section = document.getElementById('projects');
       if (!section) return;
+
+      const projectTitle = project.link
+        ? `<span class="project-title-link" role="link" tabindex="0" data-link="${project.link}">${project.name}</span>`
+        : `<span class="project-title-text">${project.name}</span>`;
   
       // Clear the section and render a full-bleed detail view
       section.innerHTML = `
+        <h2 class="subsection-title section-title-primary">Projects</h2>
         <div class="project-detail">
           <div class="project-detail-header">
             <div class="project-detail-meta">
@@ -141,7 +146,7 @@
                     </button>
                 </div>
                 <div class="project-detail-meta-bottom">
-                <h2>${project.name}</h2>
+                <h2>${projectTitle}</h2>
                 ${project.role ? `<div class="project-role">${project.role}</div>` : ''}
                 ${project.tech?.length ? `<div class="project-tech">Tech: ${project.tech.join(', ')}</div>` : ''}
                 </div>
@@ -173,10 +178,27 @@
       $('#back-to-projects').addEventListener('click', () => {
         // restore the original Projects tab layout
         section.innerHTML = `
+          <h2 class="subsection-title section-title-primary section-title-tight">Projects</h2>
           <div class="projects-grid" id="projects-grid"></div>
         `;
         renderProjectsIndex(allProjects);
       });
+
+      const projectTitleLink = section.querySelector('.project-title-link');
+      if (projectTitleLink) {
+        const link = projectTitleLink.getAttribute('data-link');
+        const openLink = () => {
+          if (!link) return;
+          window.open(link, '_blank', 'noopener');
+        };
+        projectTitleLink.addEventListener('click', openLink);
+        projectTitleLink.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLink();
+          }
+        });
+      }
     };
   
     const renderProjects = (projArr=[]) => {
