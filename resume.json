@@ -150,7 +150,7 @@
         "Implemented PostgreSQL persistence for chat history to provide users with past conversation logs."
       ],
       "img": "images/lloydbot_ss.png",
-      "video": "demo-videos/lpc-ai-agent-porn.mov" 
+      "video": "demo-videos/lpc-ai-agent-demo.mp4" 
     },
     {
       "name": "Event Lead Capture Web App",
@@ -164,7 +164,7 @@
         "Automated entry of captured leads into the company's internal system (Clypboard)."
       ],
       "img": "images/event_leads_ss.png",
-      "video": "demo-videos/lpc-eventleads-demo.mov"
+      "video": "demo-videos/lpc-eventleads-demo.mp4"
     },
     {
       "name": "Workday to Google Calendar Converter",
@@ -177,7 +177,7 @@
         "Implemented Google OAuth authentication and deployed the app to Vercel, supporting 180+ active users."
       ],
       "img": "images/converter_ss.png",
-      "video": "demo-videos/workday-to-google-demo.mov"
+      "video": "demo-videos/workday-to-google-demo.mp4"
     }
   ],
 
