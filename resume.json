@@ -5,8 +5,9 @@
     "location": "San Diego, CA",
     "linkedin": "https://www.linkedin.com/in/wyattogle28",
     "description": [
-        "I'm a sophomore at Washington University in St. Louis studying Computer Science & Economics with minors in Finance and Spanish. I'm passionate about learning new things, and using my skills and interests to help others.",
-        "I'm a quick learner who enjoys tackling new challenges—whether that's writing code, leading teams, or exploring emerging tech. Outside the classroom, I love baseball, weightlifting, skiing, and travel."
+        "I'm a sophomore at Washington University in St. Louis studying Computer Science & Economics with a minor in Finance. I'm passionate about learning new things, and using my skills and interests to help others.",
+        "I'm a quick learner who enjoys tackling new challenges—whether that's learning a new programming language, leading teams, or exploring emerging tech.",
+        "Outside the classroom, I love baseball, weightlifting, skiing, brazilian jiu jitsu, film, and travel."
       ],
     "education": [
       {
@@ -16,12 +17,13 @@
         "years": "Aug. 2024 — May 2028",
         "gpa": "3.92/4.00",
         "coursework": [
+          "Data Structures & Algorithms",
           "Object-Oriented Software Development Lab",
           "Rapid Prototype Development and Creative Programming",
-          "Data Structures & Algorithms",
           "Logic & Discrete Math",
           "Probability and Statistics for Engineering",
           "Intermediate Microeconomic Theory",
+          "Introduction to Econometrics",
           "Calculus III"
         ]
       },
@@ -89,9 +91,18 @@
     ],
     "leadership": [
       {
+        "role": "Social Chair",
+        "organization": "Sigma Alpha Epsilon",
+        "years": "Dec 2025 — Present",
+        "bullets": [
+          "Organize social events and activities for the fraternity, fostering a strong sense of community and brotherhood among members.",
+          "Coordinate with other campus organizations, leaders, and local businesses to plan and execute successful events."
+        ]
+      },
+      {
         "role": "Recruitment Chairman",
-        "organization": "Sigma Alpha Epsilon Fraternity",
-        "years": "Aug 2025 — Present",
+        "organization": "Sigma Alpha Epsilon",
+        "years": "Aug 2025 — Feb 2026",
         "bullets": [
           "Spearheaded an initiative to increase our recruitment budget by meeting and setting up calls with a National Housing Corporation Treasurer and organizing a professional pitch deck resulting in $7,000 of additional funding.",
           "Organized events and initiated introductions between 200+ potential new members and active members to maximize recruitment yield for the 2025-26 recruitment cycle."
@@ -99,7 +110,7 @@
       },
       {
         "role": "Rush Committee",
-        "organization": "Alpha Kappa Psi Professional Fraternity",
+        "organization": "Alpha Kappa Psi",
         "years": "Aug 2025 — Sep 2025",
         "bullets": [
           "Helped organize, manage, and set up recruitment events for my professional business fraternity.",
@@ -180,7 +191,12 @@
       "video": "demo-videos/workday-to-google-demo.mp4"
     }
   ],
-
+  "currently_working_on": [
+    "I'm taking high-level courses on Object-Oriented Software Development and learning C++",
+    "I'm doing independent study through Codecademy Machine Learning / Data courses to hone my skills in Machine Learning where my interests lie",
+    "I'm working part time at Rottler Pest Solutions developing internal tools and scripts to improve operations and efficiency",
+    "I'm acting head social chair for my fraternity, organizing events and activities with other campus organizations and businesses to foster community and brotherhood within the school"
+  ],
   "skills": [
     "Java", "Python", "Ruby", "JavaScript", "SQL (Postgres)", "HTML/CSS", "Git", "Vercel", "VS Code",
     "PostgreSQL", "AWS", "Adobe Illustrator", "Intermediate Spanish", "React", "Next.js", "G-Suite"

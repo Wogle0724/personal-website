@@ -805,38 +805,28 @@ footer {
 
 
 /* ===== About Me layout ===== */
-#aboutme .about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 24px;
+#aboutme .about-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   margin-top: 8px;
 }
-#aboutme .about-card {
-  border-radius: 18px;
-  padding: 18px 20px;
+
+#about-description {
+  display: block;
 }
-#aboutme .about-card h3.subsection-subtitle {
+
+#about-description p {
   margin: 0 0 10px 0;
+}
+
+#aboutme .about-section h3.subsection-subtitle {
+  margin: 0 0 8px 0;
   color: var(--primary);
   font-weight: 700;
   font-size: 1.5rem;
   font-family: 'Cormorant Garamond', serif;
   letter-spacing: 0.02em;
-}
-
-/* Make the overview span the row; its paragraphs can sit in 2 cols */
-#aboutme .about-overview {
-  grid-column: 1 / -1; /* full width top row */
-}
-#about-description {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px 20px;
-}
-
-/* Groups card can stretch if needed */
-#aboutme .about-groups {
-  grid-column: 1 / -1; /* full width bottom row on desktop */
 }
 
 /* Groups list spacing */
@@ -848,6 +838,14 @@ footer {
   font-family: 'Cormorant Garamond', serif;
 }
 #groups-list li { margin: 4px 0; line-height: 1.4; }
+
+#current-work-list {
+  padding: 0;
+  list-style: disc;
+  font-size: 1.15rem;
+  font-family: 'Cormorant Garamond', serif;
+}
+#current-work-list li { margin: 4px 0; line-height: 1.4; }
 
 /* Inline label alignment for Skills/Interests */
 #aboutme p {
@@ -863,25 +861,11 @@ footer {
   font-size: 1rem;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  #aboutme .about-grid {
-    grid-template-columns: 1fr; /* stack */
-  }
-  #about-description {
-    grid-template-columns: 1fr; /* paragraphs stack */
-  }
-  #aboutme .about-groups {
-    grid-column: auto;
-  }
-}
-
 /* Glass effect for inner cards only (profile and main-content stay transparent) */
 .contact-item,
 .project-card,
 .timeline-card,
 .project-detail,
-#aboutme .about-card,
 .video-embed,
 .video-placeholder {
   background: var(--glass-bg);

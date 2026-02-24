@@ -229,6 +229,17 @@
       if (interestsEl && data.interests?.length) {
         interestsEl.textContent = data.interests.join(', ');
       }
+
+      // What I'm working on right now (list)
+      const currentWork = document.getElementById('current-work-list');
+      if (currentWork) {
+        currentWork.innerHTML = '';
+        (data.currently_working_on || []).forEach(item => {
+          const par = document.createElement('p');
+          par.textContent = item;
+          currentWork.appendChild(par);
+        });
+      }
   
       // Groups & Involvement (list)
       const groupsUL = document.getElementById('groups-list');
