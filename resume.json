@@ -192,6 +192,7 @@
     }
   ],
   "currently_working_on": [
+    "I'm developing a full-stack cryptocurrency price prediction platform (ML-Crypto) using a microservices architecture: React + Vite frontend with TradingView Charts, Node.js/Express REST API backend with Redis caching, a Python FastAPI ML inference service running a PyTorch LSTM model trained on data from CoinGecko, Apache Airflow for handling data ingestion and daily model retraining, MLflow for experiment tracking and model registry, and MySQL for price storage - all containerized within Docker",
     "I'm taking high-level courses on Object-Oriented Software Development and learning C++",
     "I'm doing independent study through Codecademy Machine Learning / Data courses to hone my skills in Machine Learning where my interests lie",
     "I'm working part time at Rottler Pest Solutions developing internal tools and scripts to improve operations and efficiency",
@@ -202,7 +203,7 @@
     "PostgreSQL", "AWS", "Adobe Illustrator", "Intermediate Spanish", "React", "Next.js", "G-Suite"
   ],
   "interests": [
-    "Cybersecurity", "Machine Learning", "Artificial Intelligence (AI)", "Web Dev", "Blockchain", "Cloud Computing (AWS)", "Hacking", "Computer Science",
+    "Machine Learning", "Artificial Intelligence", "Web Dev", "Cybersecurity", "Blockchain", "Cloud Computing", "Project Management",
     "Baseball", "Weightlifting", "Skiing", "Brazilian Jiu Jitsu", "Travel", "Graphic Design", "Film", "Journaling"
   ],
   "groups": [

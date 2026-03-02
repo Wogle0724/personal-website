@@ -234,11 +234,13 @@
       const currentWork = document.getElementById('current-work-list');
       if (currentWork) {
         currentWork.innerHTML = '';
+        const ul = document.createElement('ul');
         (data.currently_working_on || []).forEach(item => {
-          const par = document.createElement('p');
-          par.textContent = item;
-          currentWork.appendChild(par);
+          const li = document.createElement('li');
+          li.textContent = item;
+          ul.appendChild(li);
         });
+        currentWork.appendChild(ul);
       }
   
       // Groups & Involvement (list)
