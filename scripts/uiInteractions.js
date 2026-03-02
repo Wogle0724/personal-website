@@ -45,12 +45,7 @@ tabs.forEach((tab) => {
 
 window.copyEmail = function () {
   const email = (window.__resumeData && window.__resumeData.email) || 'ogle.wyatt28@gmail.com';
-  navigator.clipboard.writeText(email).then(() => {
-    const popup = document.getElementById('copy-popup');
-    if (!popup) return;
-    popup.classList.add('show');
-    setTimeout(() => popup.classList.remove('show'), 1200);
-  });
+  window.location.href = 'mailto:' + email;
 };
 
 let hintTimer = null;
