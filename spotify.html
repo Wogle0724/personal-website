@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spotify · Build Mode — a product teardown and feature pitch by Wyatt Ogle for a faster way to build playlists, on mobile and desktop.">
+  <title>Spotify · Build Mode — Product Pitch · Wyatt Ogle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+
+  <!-- Slim top bar: back to portfolio + jump to the live demo -->
+  <header class="wp-nav">
+    <div class="wp-nav-inner">
+      <a class="wp-back" href="index.html#pitches">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to portfolio
+      </a>
+    </div>
+  </header>
+
+  <main class="wp-main">
+    <article class="cs">
+
+      <header class="cs-head">
+        <h1 class="cs-title">Spotify · Build Mode</h1>
+        <p class="cs-date">May 2026</p>
+      </header>
+
+      <section class="cs-section">
+        <h2>Problem</h2>
+        <ul>
+          <li><strong>Adding a song to a playlist is a multi-tap chore</strong> — tap the plus, pull it out of Liked Songs, find the right playlist, confirm; or dig through the "⋯" menu for "Add to playlist." Every track is a detour.</li>
+          <li>It breaks down most when you have the least attention to spare. In the car or on the go, a song you'd love to save slips by, because capturing it means stopping to tap through menus.</li>
+          <li><strong>Discovery feels stale</strong> — recommendations keep looping back to songs you've already turned down, so even finding a track worth adding is harder than it should be.</li>
+          <li>There's no way to build a playlist as effortlessly as it is to think <em>"I want to add this song."</em></li>
+        </ul>
+
+        <!-- How it works today: current-state screenshots (contrast with the demo below) -->
+        <figure class="cs-flow">
+          <figcaption class="cs-flow-label">How it works today</figcaption>
+          <div class="cs-flow-steps">
+            <div class="cs-shot">
+              <div class="cs-shot-media">
+                <img src="images/spotify-problem/1.png" alt="Today, step 1 — tap the add button on the now-playing screen" loading="lazy">
+              </div>
+              <span class="cs-shot-cap"><strong>1</strong> · Tap ⊕ to save the song</span>
+            </div>
+            <div class="cs-flow-arrow" aria-hidden="true">→</div>
+            <div class="cs-shot">
+              <div class="cs-shot-media">
+                <img src="images/spotify-problem/2.png" alt="Today, step 2 — the song is dumped into Liked Songs and a sheet appears" loading="lazy">
+              </div>
+              <span class="cs-shot-cap"><strong>2</strong> · It dumps into Liked Songs</span>
+            </div>
+            <div class="cs-flow-arrow" aria-hidden="true">→</div>
+            <div class="cs-shot">
+              <div class="cs-shot-media cs-shot-media--top">
+                <img src="images/spotify-problem/3.png" alt="Today, step 3 — find the playlist you actually wanted, add it, then tap Done" loading="lazy">
+              </div>
+              <span class="cs-shot-cap"><strong>3</strong> · Hunt for the right playlist</span>
+            </div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="cs-section">
+        <h2>Proposed Solution — Build Mode</h2>
+        <ul>
+          <li><strong>One-tap building.</strong> Enter Build Mode on any playlist and Spotify feeds you songs one at a time, already playing. For each one you do exactly one thing: <strong>Add</strong> or <strong>Skip</strong>.</li>
+          <li><strong>You pick the source.</strong> Songs you already know (pulled from your other playlists), songs you don't (pure discovery), or a mix of both — and the picks adapt as you go.</li>
+          <li><strong>Hands-free.</strong> Add and Skip are big, equal targets and the whole flow is voice-controlled — grow a playlist from the car without looking at your phone.</li>
+        </ul>
+      </section>
+
+      <!-- Demo at the end, with a link to the real pitch site -->
+      <section class="cs-section cs-demo" id="demo">
+        <div class="cs-demo-frame">
+          <iframe src="https://spotify-build-mode.vercel.app/" title="Spotify Build Mode interactive prototype" loading="lazy" allow="microphone"></iframe>
+          <a class="cs-demo-open" href="https://spotify-build-mode.vercel.app/" target="_blank" rel="noopener" aria-label="Open the demo in a new tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+        <div class="cs-demo-foot">
+          <a class="cs-demo-cta" href="index.html#pitches">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            View Other Products
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p style="margin-top:0.6rem;">Designed &amp; built by Wyatt Ogle · 2026 · Build Mode is a product-pitch concept, not affiliated with Spotify.</p>
+  </footer>
+
+</body>
+</html>

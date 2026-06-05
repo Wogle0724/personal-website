@@ -1,134 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wyatt Ogle - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Wyatt Ogle — aspiring Product Manager and CS & Economics student at WashU. I turn user problems into shipped products, bridging engineering, design, and business.">
+  <title>Wyatt Ogle — Product Manager</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <header class="topbar" id="topbar">
-    <div class="topbar-inner">
-      <nav class="tabs">
-        <button class="tab active" type="button" data-tab="aboutme">About Me</button>
-        <button class="tab" type="button" data-tab="education">Education</button>
-        <button class="tab" type="button" data-tab="work">Experience</button>
-        <button class="tab" type="button" data-tab="projects">Projects</button>
+<body id="top">
+
+  <!-- Sticky navigation -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">Wyatt Ogle</a>
+      <nav class="nav-links" aria-label="Section navigation">
+        <a href="#story" data-nav="story">Story</a>
+        <a href="#built" data-nav="built">Projects</a>
+        <a href="#pitches" data-nav="pitches">Pitches</a>
+        <a href="#life" data-nav="life">Life</a>
+        <a href="#contact" data-nav="contact">Contact</a>
       </nav>
+      <a class="nav-cta" href="mailto:o.wyatt@wustl.edu">Get in touch</a>
     </div>
   </header>
 
-  <div class="content-mask-wrap">
-  <section class="hero" id="hero">
-    <div class="hero-inner">
-      <h1 class="hero-title" id="hero-title">Hello</h1>
-      <p class="hero-subtitle" id="hero-subtitle">I'm Wyatt</p>
-      <p class="hero-hint" id="hero-hint" aria-hidden="true">Scroll for more</p>
-    </div>
-  </section>
-
-  <div class="page-shell">
-    <div class="container content-shell">
-      <aside class="profile">
-        <img src="images/your-headshot.jpg" class="profile-pic" alt="Wyatt Ogle headshot">
-        <h1 class="profile-name" id="profile-name">Wyatt Ogle</h1>
-        <div class="subtitle-badge" id="subtitle-badge">WashU CS &amp; Econ Student</div>
-        <div class="profile-contact-list">
-          <button class="contact-item" type="button" onclick="copyEmail()" title="Copy email">
-            <span id="copy-popup" class="copy-popup">Email copied to clipboard</span>
-            <span class="icon-box">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-            </span>
-            <span>
-              <span class="contact-label">EMAIL</span>
-              <span class="contact-info-text" id="email-text">ogle.wyatt28@gmail.com</span>
-            </span>
-          </button>
-          <a class="contact-item" id="linkedin-link" href="https://linkedin.com/in/wyattogle28" target="_blank">
-            <span class="icon-box">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin-icon lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-            </span>
-            <span>
-              <span class="contact-label">LINKEDIN</span>
-              <span class="contact-info-text" id="linkedin-text">linkedin.com/in/wyattogle28</span>
-            </span>
-          </a>
-          <a class="contact-item" id="github-link" href="https://github.com/Wogle0724" target="_blank">
-            <span class="icon-box">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github-icon lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-            </span>
-            <span>
-              <span class="contact-label">GITHUB</span>
-              <span class="contact-info-text" id="github-text">github.com/Wogle0724</span>
-            </span>
-          </a>
-          <div class="contact-item not-link">
-            <span class="icon-box">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-            </span>
-            <span>
-              <span class="contact-label">LOCATION</span>
-              <span class="contact-info-text" id="location-text">San Diego, CA</span>
-            </span>
-          </div>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <h1 class="hero-title">Hey, I'm Wyatt <span class="wave">👋</span></h1>
+          <p class="hero-lead" id="hero-lead"></p>
+          <p class="hero-kicker" id="hero-kicker"></p>
         </div>
-      </aside>
+        <div class="hero-photo">
+          <img src="images/friendly_casual.JPG" alt="Wyatt Ogle" class="hero-img" id="hero-img">
+        </div>
+      </div>
+    </section>
 
-      <main class="main-content">
-        <section id="aboutme" class="tab-content active">
-          <h2 class="section-title section-title-primary">About Me</h2>
-
-          <div class="about-stack">
-            <div id="about-description"></div>
-
-            <section class="about-section">
-              <h3 class="subsection-subtitle">What I'm working on right now</h3>
-              <div id="current-work-list"></div>
-            </section>
-
-            <section class="about-section">
-              <h3 class="subsection-subtitle">Skills</h3>
-              <p><span id="skills-text"></span></p>
-            </section>
-
-            <section class="about-section">
-              <h3 class="subsection-subtitle">Interests</h3>
-              <p><span id="interests-text"></span></p>
-            </section>
-
-            <section class="about-section">
-              <h3 class="subsection-subtitle">Groups &amp; Involvement</h3>
-              <ul id="groups-list"></ul>
-            </section>
+    <!-- Story: show, don't tell (pinned scroll clips) -->
+    <section id="story" class="story" aria-label="A visual progression of my work">
+      <div class="story-pin" id="story-pin">
+        <div class="story-stage">
+          <p class="eyebrow" id="story-eyebrow"></p>
+          <h2 class="section-title story-title" id="story-title"></h2>
+          <p class="story-lead" id="story-lead"></p>
+          <div class="story-viewer" id="story-viewer">
+            <!-- clips injected here -->
           </div>
-        </section>
+          <div class="story-progress" id="story-progress" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
 
-        <section id="education" class="tab-content">
-          <h2 class="subsection-title section-title-primary section-title-tight">Education</h2>
-          <div class="timeline" id="education-timeline"></div>
-        </section>
+    <!-- Things I've built -->
+    <section id="built" class="section">
+      <p class="eyebrow" id="built-eyebrow"></p>
+      <h2 class="section-title" id="built-title"></h2>
+      <div class="built-list" id="built-list"></div>
+    </section>
 
-        <section id="work" class="tab-content">
-          <h2 class="subsection-title section-title-primary section-title-tight">Work Experience</h2>
-          <div class="timeline" id="work-timeline"></div>
+    <!-- Product pitches -->
+    <section id="pitches" class="section">
+      <p class="eyebrow" id="pitches-eyebrow"></p>
+      <h2 class="section-title section-title-tight" id="pitches-title"></h2>
+      <p class="pitches-lead" id="pitches-lead"></p>
+      <div class="pitch-featured" id="pitch-featured"></div>
+      <div class="pitches-grid" id="pitches-grid"></div>
+    </section>
 
-          <h2 class="subsection-title section-title-primary section-title-leadership">Leadership &amp; Involvement</h2>
-          <div class="timeline" id="leadership-timeline"></div>
-        </section>
+    <!-- Personal: polaroids -->
+    <section id="life" class="section">
+      <div class="life-grid">
+        <div class="life-intro">
+          <p class="eyebrow" id="life-eyebrow"></p>
+          <h2 class="section-title section-title-tight" id="life-title"></h2>
+          <p class="life-lead" id="life-lead"></p>
+        </div>
+        <div class="polaroids reveal" id="polaroids"></div>
+      </div>
+    </section>
 
-        <section id="projects" class="tab-content">
-          <h2 class="subsection-title section-title-primary section-title-tight">Projects</h2>
-          <div class="projects-grid" id="projects-grid"></div>
-        </section>
-      </main>
-    </div>
-  </div>
+    <!-- Contact / CTA -->
+    <section id="contact" class="section contact">
+      <p class="eyebrow">Reach out</p>
+      <h2 class="section-title contact-title">Let's get in touch 🤝</h2>
 
-  <footer>
-    <p>© 2025 Wyatt Ogle</p>
+      <div class="contact-icons">
+        <button class="contact-icon" type="button" onclick="copyEmail()" aria-label="Copy email" title="Copy email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3 6 9 6 9-6"></path></svg>
+        </button>
+
+        <button class="contact-icon" type="button" onclick="copyPhone()" aria-label="Copy phone number" title="Copy phone number">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </button>
+
+        <a class="contact-icon" id="linkedin-link" href="https://linkedin.com/in/wyattogle28" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"></path></svg>
+        </a>
+
+        <a class="contact-icon" id="github-link" href="https://github.com/Wogle0724" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.12-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.23 0 4.63-2.81 5.65-5.49 5.95.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"></path></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Designed &amp; built by Wyatt Ogle · 2026</p>
   </footer>
-  </div>
+
+  <div class="copy-popup" id="copy-popup">Email copied to clipboard</div>
 
   <script src="scripts/renderResume.js" defer></script>
   <script src="scripts/uiInteractions.js" defer></script>

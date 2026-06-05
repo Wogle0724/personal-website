@@ -1,147 +1,157 @@
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
+/* =========================================================================
+   UI interactions — sticky nav, scrollspy, scroll-reveal, copy email,
+   and the pinned "show, don't tell" story scroller.
+   ========================================================================= */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
-const tabs = Array.from(document.querySelectorAll('.tab'));
-const tabContents = Array.from(document.querySelectorAll('.tab-content'));
+const nav = document.getElementById('nav');
+const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
 
-const hero = document.getElementById('hero');
-const heroTitle = document.getElementById('hero-title');
-const heroSubtitle = document.getElementById('hero-subtitle');
-const heroHint = document.getElementById('hero-hint');
-const profile = document.querySelector('.profile');
-const mainContent = document.querySelector('.main-content');
-const topbar = document.getElementById('topbar');
-
-const getTopbarOffset = () => {
-  const styles = getComputedStyle(document.documentElement);
-  const cssValue = styles.getPropertyValue('--topbar-height').trim();
-  const cssNumber = parseFloat(cssValue);
-  if (!Number.isNaN(cssNumber)) {
-    return cssNumber + 20;
-  }
-  return topbar ? topbar.offsetHeight + 20 : 84;
-};
-
-const activateTab = (tab) => {
-  tabs.forEach((t) => t.classList.remove('active'));
-  tabContents.forEach((c) => c.classList.remove('active'));
-  tab.classList.add('active');
-  const target = document.getElementById(tab.dataset.tab);
-  if (target) {
-    target.classList.add('active');
-    const offset = getTopbarOffset();
-    window.requestAnimationFrame(() => {
-      const top = Math.max(target.getBoundingClientRect().top + window.scrollY - offset, 0);
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  }
-};
-
-tabs.forEach((tab) => {
-  tab.addEventListener('click', () => activateTab(tab));
-});
-
-window.copyEmail = function () {
-  const email = (window.__resumeData && window.__resumeData.email) || 'ogle.wyatt28@gmail.com';
-  window.location.href = 'mailto:' + email;
-};
-
-let hintTimer = null;
-let heroHeight = hero ? hero.offsetHeight : window.innerHeight;
-let ticking = false;
-let heroScrollLocked = false;
-let heroLockScrollY = 0;
-
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-const updateHeroText = () => {
-  if (!hero) return;
-  const rect = hero.getBoundingClientRect();
-  const heroOut = rect.bottom < 0;
-  if (heroTitle) {
-    heroTitle.textContent = heroOut ? 'Hello again' : 'Hello';
-  }
-  if (heroSubtitle) {
-    heroSubtitle.textContent = heroOut ? 'Back so soon?' : "I'm Wyatt";
-  }
-  if (heroHint && heroOut) {
-    heroHint.classList.remove('show');
-  }
-};
-
-const updateScrollDrivenUI = () => {
-  const scrollY = window.scrollY;
-  heroHeight = hero ? hero.offsetHeight : heroHeight;
-  const progress = clamp(scrollY / heroHeight, 0, 1);
-  const delayedProgress = clamp((progress - 0.08) / 0.92, 0, 1);
-
-  if (!heroScrollLocked && progress >= 1) {
-    heroScrollLocked = true;
-    heroLockScrollY = heroHeight;
-  }
-
-  if (heroScrollLocked && scrollY < heroLockScrollY) {
-    window.scrollTo(0, heroLockScrollY);
-  }
-
-  if (profile) {
-    if (heroScrollLocked) {
-      profile.style.transform = 'translateX(0%)';
-      profile.style.opacity = '1';
-    } else {
-      const sidebarShift = -120 + (120 * progress);
-      profile.style.transform = `translateX(${sidebarShift}%)`;
-      profile.style.opacity = progress.toFixed(3);
+/* ---------------------------------------------------------------------- */
+/* Scroll-reveal (IntersectionObserver) — exposed for dynamic content     */
+/* ---------------------------------------------------------------------- */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      revealObserver.unobserve(entry.target);
     }
-  }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-  if (mainContent) {
-    const contentShift = 48 - (48 * delayedProgress);
-    mainContent.style.transform = `translateX(${contentShift}px)`;
-    mainContent.style.opacity = delayedProgress.toFixed(3);
-  }
-
-  if (topbar) {
-    const topbarShift = -140 + (140 * progress);
-    topbar.style.transform = `translateY(${topbarShift}%)`;
-    topbar.style.opacity = progress.toFixed(3);
-    topbar.style.pointerEvents = progress > 0.1 ? 'auto' : 'none';
-  }
-
-  document.body.classList.toggle('scrolled', progress >= 1);
-  updateHeroText();
-};
-
-const scheduleHint = () => {
-  if (!heroHint || !hero) return;
-  clearTimeout(hintTimer);
-  heroHint.classList.remove('show');
-  const onHero = window.scrollY < heroHeight;
-  if (!onHero) return;
-  hintTimer = setTimeout(() => {
-    if (window.scrollY < heroHeight) {
-      heroHint.classList.add('show');
-    }
-  }, 5000);
-};
-
-const onScroll = () => {
-  if (ticking) return;
-  ticking = true;
-  window.requestAnimationFrame(() => {
-    updateScrollDrivenUI();
-    scheduleHint();
-    ticking = false;
+window.observeReveals = function () {
+  document.querySelectorAll('.reveal:not(.io-watched)').forEach((el, i) => {
+    el.classList.add('io-watched');
+    if (!el.style.getPropertyValue('--i')) el.style.setProperty('--i', (i % 6).toString());
+    revealObserver.observe(el);
   });
 };
+window.observeReveals();
 
-window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', () => {
-  heroHeight = hero ? hero.offsetHeight : window.innerHeight;
-  updateScrollDrivenUI();
-});
+/* ---------------------------------------------------------------------- */
+/* Sticky nav — gains a background once the page is scrolled              */
+/* ---------------------------------------------------------------------- */
+const onScrollNav = () => {
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 24);
+};
+window.addEventListener('scroll', onScrollNav, { passive: true });
+onScrollNav();
 
-updateScrollDrivenUI();
-scheduleHint();
+/* ---------------------------------------------------------------------- */
+/* Scrollspy — highlight the nav link for the section in view             */
+/* ---------------------------------------------------------------------- */
+const sections = navLinks
+  .map((link) => document.getElementById(link.dataset.nav))
+  .filter(Boolean);
+
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const id = entry.target.id;
+    navLinks.forEach((l) => l.classList.toggle('active', l.dataset.nav === id));
+  });
+}, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+sections.forEach((s) => spy.observe(s));
+
+/* ---------------------------------------------------------------------- */
+/* "Show, don't tell" — pinned scroll story                               */
+/* The section is made tall; an inner panel sticks to the viewport while  */
+/* we crossfade between clips based on how far we've scrolled through it.  */
+/* ---------------------------------------------------------------------- */
+window.initStoryScroll = function (numClips) {
+  const section = document.getElementById('story');
+  const clips = Array.from(document.querySelectorAll('.story-clip'));
+  const dots = Array.from(document.querySelectorAll('.story-dot'));
+  if (!section || !clips.length || !numClips) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Fallback: no scroll-jacking — just stack the clips and play them all.
+  if (reduceMotion) {
+    section.classList.add('story-static');
+    clips.forEach((c) => {
+      c.classList.add('is-active');
+      c.style.opacity = 1;
+      const v = c.querySelector('video');
+      if (v) { v.muted = true; v.play().catch(() => {}); }
+    });
+    return;
+  }
+
+  section.classList.add('story-dynamic');
+  // Each clip "sticks" for a long stretch of scroll before the next one hits.
+  const PER_CLIP_VH = 135;
+  section.style.height = (numClips * PER_CLIP_VH + 40) + 'vh';
+
+  const setActiveVideo = (idx) => {
+    clips.forEach((c, i) => {
+      const v = c.querySelector('video');
+      if (!v) return;
+      if (i === idx) { try { v.currentTime = 0; } catch (e) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      else { v.pause(); }
+    });
+  };
+
+  // Discrete model: a scroll threshold *flips* the active clip. There is no
+  // in-between state — you can't park the page on a half-faded clip. The CSS
+  // then plays a short, non-overlapping fade-out → fade-in.
+  let currentIdx = -1;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const scrollLen = section.offsetHeight - vh;
+    let t = scrollLen > 0 ? (-rect.top) / scrollLen : 0;
+    t = Math.max(0, Math.min(1, t));
+
+    let idx = Math.floor(t * numClips);
+    if (idx >= numClips) idx = numClips - 1;
+    if (idx < 0) idx = 0;
+    if (idx === currentIdx) return;
+    currentIdx = idx;
+
+    setActiveVideo(idx);
+    clips.forEach((c, i) => c.classList.toggle('is-active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  };
+
+  const onScroll = () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+};
+
+/* ---------------------------------------------------------------------- */
+/* Copy to clipboard (email / phone) with a toast                         */
+/* ---------------------------------------------------------------------- */
+const showCopyToast = (label) => {
+  const toast = document.getElementById('copy-popup');
+  if (!toast) return;
+  toast.textContent = label + ' copied to clipboard';
+  toast.classList.add('show');
+  clearTimeout(window.__copyTimer);
+  window.__copyTimer = setTimeout(() => toast.classList.remove('show'), 1900);
+};
+
+window.copyEmail = function () {
+  const email = (window.__resumeData && window.__resumeData.email) || 'o.wyatt@wustl.edu';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(email).then(() => showCopyToast('Email')).catch(() => { window.location.href = 'mailto:' + email; });
+  } else {
+    window.location.href = 'mailto:' + email;
+  }
+};
+
+window.copyPhone = function () {
+  const phone = (window.__resumeData && window.__resumeData.phone) || '442-515-0724';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(phone).then(() => showCopyToast('Phone number')).catch(() => { window.location.href = 'tel:' + phone; });
+  } else {
+    window.location.href = 'tel:' + phone;
+  }
+};

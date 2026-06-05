@@ -1,288 +1,219 @@
 (async function () {
-    const $ = (sel, root=document) => root.querySelector(sel);
-    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-  
-    // Helpers
-    const setText = (id, text) => { const el = document.getElementById(id); if (el && text) el.textContent = text; };
-    const setLink = (id, href, textOverride) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (!href) { return; }
-      el.href = href;
-      const txt = document.getElementById(id.replace('-link','-text'));
-      if (txt) txt.textContent = textOverride || href.replace(/^https?:\/\//,'');
-    };
-    const li = (t) => {
-      const el = document.createElement('li');
-      if (t instanceof Node) el.appendChild(t);
-      else el.innerHTML = t; // allow <b>Relevant Coursework:</b> to render
-      return el;
-    };
-    const ul = (items=[]) => { const u = document.createElement('ul'); items.forEach(i => u.appendChild(li(i))); return u; };
-  
-    const makeTimelineCard = ({ title, pill, subtitle, bullets }) => {
-      const card = document.createElement('div');
-      card.className = 'timeline-card';
-      card.innerHTML = `
-        <div class="timeline-dot"></div>
-        <div class="timeline-card-content">
-          <div class="timeline-card-header">
-            <h3>${title}</h3>
-            <span class="timeline-pill">${pill || ''}</span>
-          </div>
-          ${subtitle ? `<span class="position-title">${subtitle}</span>` : ''}
+  // ---- Helpers ----------------------------------------------------------
+  const setText = (id, text) => { const el = document.getElementById(id); if (el && text != null) el.textContent = text; };
+  const setLink = (id, href, textOverride) => {
+    const el = document.getElementById(id);
+    if (!el || !href) return;
+    el.href = href;
+    const txt = document.getElementById(id.replace('-link', '-text'));
+    if (txt) txt.textContent = textOverride || href.replace(/^https?:\/\//, '');
+  };
+  const esc = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const reveal = () => { if (typeof window.observeReveals === 'function') window.observeReveals(); };
+
+  const arrowRightSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+
+  const nudgeAutoplay = (root) => {
+    root.querySelectorAll('video[autoplay]').forEach((v) => {
+      const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+      tryPlay();
+      v.addEventListener('canplay', tryPlay, { once: true });
+    });
+  };
+
+  // ---- Hero -------------------------------------------------------------
+  const renderHero = (hero = {}) => {
+    setText('hero-lead', hero.lead);
+    setText('hero-kicker', hero.kicker);
+    if (hero.photo) { const img = document.getElementById('hero-img'); if (img) img.src = hero.photo; }
+  };
+
+  // ---- Story: show, don't tell -----------------------------------------
+  const renderStory = (story = {}) => {
+    setText('story-eyebrow', story.eyebrow);
+    setText('story-title', story.title);
+    setText('story-lead', story.lead);
+    const viewer = document.getElementById('story-viewer');
+    const progress = document.getElementById('story-progress');
+    if (!viewer) return;
+    const clips = story.clips || [];
+
+    viewer.innerHTML = clips.map((c, i) => `
+      <div class="story-clip${i === 0 ? ' is-active' : ''}" data-index="${i}">
+        <div class="story-clip-media">
+          ${c.video
+            ? `<video src="${c.video}" muted loop playsinline preload="metadata" aria-hidden="true"></video>`
+            : `<div class="story-clip-placeholder">Clip coming soon</div>`}
         </div>
-      `;
-      const content = card.querySelector('.timeline-card-content');
-      if (bullets && bullets.length) {
-        // If there's only one string containing HTML with its own structure, inject it directly (no extra <ul>)
-        if (bullets.length === 1 && typeof bullets[0] === 'string' && bullets[0].includes('<p')) {
-          const wrapper = document.createElement('div');
-          wrapper.innerHTML = bullets[0];
-          content.appendChild(wrapper);
-        } else {
-          content.appendChild(ul(bullets));
-        }
-      }
-      return card;
-    };
-  
-    const renderEducation = (eduArr=[]) => {
-      const mount = document.getElementById('education-timeline');
-      if (!mount) return;
-      mount.innerHTML = '';
-      eduArr.forEach(e => {
-        let html = '';
-        if (e.degree) html += `<p><b>Degree:</b> ${e.degree}${e.minors?.length ? `<br><b>Minors:</b> ${e.minors.join(', ')}` : ''}</p>`;
-        if (e.gpa) html += `<p><b>GPA:</b> ${e.gpa}</p>`;
-        if (e.sat) html += `<p><b>SAT:</b> ${e.sat}</p>`;
-        if (e.coursework?.length) {
-          html += `<p><b>Relevant Coursework:</b></p><ul>${e.coursework.map(c => `<li>${c}</li>`).join('')}</ul>`;
-        }
-
-        const card = makeTimelineCard({
-          title: e.school,
-          pill: e.years || '',
-          subtitle: '',
-          bullets: [html] // keep structure consistent with existing card builder
-        });
-        mount.appendChild(card);
-      });
-    };
-  
-    const renderExperience = (expArr=[]) => {
-      const mount = document.getElementById('work-timeline');
-      if (!mount) return;
-      mount.innerHTML = '';
-      expArr.forEach(xp => {
-        mount.appendChild(makeTimelineCard({
-          title: xp.company,
-          pill: xp.years || '',
-          subtitle: xp.title || '',
-          bullets: xp.bullets || xp.description || []
-        }));
-      });
-    };
-  
-    const renderLeadership = (leadArr=[]) => {
-      const mount = document.getElementById('leadership-timeline');
-      if (!mount) return;
-      mount.innerHTML = '';
-      leadArr.forEach(ld => {
-        mount.appendChild(makeTimelineCard({
-          title: ld.organization,
-          pill: ld.years || '',
-          subtitle: ld.role || '',
-          bullets: ld.bullets || []
-        }));
-      });
-    };
-  
-    // ---- Projects: index + detail views ----
-    const renderProjectsIndex = (projArr=[]) => {
-      const mount = document.getElementById('projects-grid');
-      if (!mount) return;
-      mount.innerHTML = '';
-      projArr.forEach((p, idx) => {
-        const a = document.createElement('a');
-        a.className = 'project-card';
-        a.href = 'javascript:void(0)';
-        a.setAttribute('data-idx', idx);
-        a.innerHTML = `
-          <img src="${p.img || 'images/placeholder.png'}" alt="${p.name}">
-          <div class="project-overlay">
-            <h3>${p.name}</h3>
-            <p>${p.description || ''}</p>
-          </div>
-        `;
-        a.addEventListener('click', () => renderProjectDetail(p, projArr));
-        mount.appendChild(a);
-      });
-    };
-  
-    const renderProjectDetail = (project, allProjects) => {
-      const section = document.getElementById('projects');
-      if (!section) return;
-
-      const projectTitle = project.link
-        ? `<span class="project-title-link" role="link" tabindex="0" data-link="${project.link}">${project.name}</span>`
-        : `<span class="project-title-text">${project.name}</span>`;
-  
-      // Clear the section and render a full-bleed detail view
-      section.innerHTML = `
-        <h2 class="subsection-title section-title-primary">Projects</h2>
-        <div class="project-detail">
-          <div class="project-detail-header">
-            <div class="project-detail-meta">
-                <div class="project-detail-meta-top">
-                    <button class="back-button" id="back-to-projects" aria-label="Back to projects">
-                        <!-- back arrow -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                        <span class="back-btn-line">Back</span>
-                    </button>
-                </div>
-                <div class="project-detail-meta-bottom">
-                <h2>${projectTitle}</h2>
-                ${project.role ? `<div class="project-role">${project.role}</div>` : ''}
-                ${project.tech?.length ? `<div class="project-tech">Tech: ${project.tech.join(', ')}</div>` : ''}
-                </div>
-            </div>
-            <img class="project-detail-image" src="${project.img || 'images/placeholder.png'}" alt="${project.name}">
-          </div>
-  
-          ${project.bullets?.length ? `<div class="project-detail-bullets">${ul(project.bullets).outerHTML}</div>` : ''}
-  
-          <div class="project-detail-demo">
-            <h3>Demo</h3>
-            ${
-              project.video
-                ? (project.video.includes('youtube.com') || project.video.includes('youtu.be') || project.video.includes('vimeo.com')
-                    ? `<div class="video-embed">
-                        <iframe src="${project.video}" title="Project demo" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen></iframe>
-                      </div>`
-                    : `<video src="${project.video}" controls style="width:100%;max-width:900px;"></video>`
-                  )
-                : `<div class="video-placeholder">No demo provided yet.</div>`
-            }
-          </div>
+        <div class="story-clip-info">
+          <span class="story-clip-year">${esc(c.year)}</span>
+          <h3 class="story-clip-name">${esc(c.title)}</h3>
+          <p class="story-clip-caption">${esc(c.caption)}</p>
         </div>
-      `;
-  
-      // wire back button
-      $('#back-to-projects').addEventListener('click', () => {
-        // restore the original Projects tab layout
-        section.innerHTML = `
-          <h2 class="subsection-title section-title-primary section-title-tight">Projects</h2>
-          <div class="projects-grid" id="projects-grid"></div>
-        `;
-        renderProjectsIndex(allProjects);
-      });
+      </div>`).join('');
 
-      const projectTitleLink = section.querySelector('.project-title-link');
-      if (projectTitleLink) {
-        const link = projectTitleLink.getAttribute('data-link');
-        const openLink = () => {
-          if (!link) return;
-          window.open(link, '_blank', 'noopener');
-        };
-        projectTitleLink.addEventListener('click', openLink);
-        projectTitleLink.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            openLink();
-          }
-        });
-      }
-    };
-  
-    const renderProjects = (projArr=[]) => {
-      // initial grid view
-      renderProjectsIndex(projArr);
-    };
-  
-    const renderAbout = (data) => {
-      // Description paragraphs
-      const descMount = document.getElementById('about-description');
-      if (descMount) {
-        descMount.innerHTML = '';
-        (data.description || []).forEach(p => {
-          const par = document.createElement('p');
-          par.textContent = p;
-          descMount.appendChild(par);
-        });
-      }
-  
-      // Skills (inline, same as current)
-      const skillsEl = document.getElementById('skills-text');
-      if (skillsEl && data.skills?.length) {
-        skillsEl.textContent = data.skills.join(', ');
-      }
-  
-      // Interests (inline)
-      const interestsEl = document.getElementById('interests-text');
-      if (interestsEl && data.interests?.length) {
-        interestsEl.textContent = data.interests.join(', ');
-      }
+    if (progress) {
+      progress.innerHTML = clips.map((_, i) =>
+        `<span class="story-dot${i === 0 ? ' is-active' : ''}"></span>`).join('');
+    }
 
-      // What I'm working on right now (list)
-      const currentWork = document.getElementById('current-work-list');
-      if (currentWork) {
-        currentWork.innerHTML = '';
-        const ul = document.createElement('ul');
-        (data.currently_working_on || []).forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = item;
-          ul.appendChild(li);
-        });
-        currentWork.appendChild(ul);
-      }
-  
-      // Groups & Involvement (list)
-      const groupsUL = document.getElementById('groups-list');
-      if (groupsUL) {
-        groupsUL.innerHTML = '';
-        const combined = [
-          ...(data.groups || []),
-          ...(data.involvement || [])
-        ];
-        combined.forEach(g => groupsUL.appendChild(li(g)));
-      }
-    };
-  
-    // Fetch JSON (same folder as your HTML)
-    let data;
-    try {
-      const res = await fetch('resume.json', { cache: 'no-cache' });
-      data = await res.json();
-      window.__resumeData = data; // for copyEmail, etc.
-    } catch (e) {
-      console.error('Failed to load resume.json', e);
-      return;
+    // Hand the section off to the scroll controller in uiInteractions.js
+    if (typeof window.initStoryScroll === 'function') window.initStoryScroll(clips.length);
+  };
+
+  // ---- Things I've built ------------------------------------------------
+  const renderBuilt = (built = {}) => {
+    setText('built-eyebrow', built.eyebrow);
+    setText('built-title', built.title);
+    const mount = document.getElementById('built-list');
+    if (!mount) return;
+    const items = built.items || [];
+    mount.innerHTML = items.map((it, idx) => {
+      const media = it.video
+        ? `<div class="built-media"><video src="${it.video}" muted loop autoplay playsinline preload="metadata" aria-hidden="true"></video></div>`
+        : (it.img ? `<div class="built-media"><img src="${it.img}" alt="${esc(it.name)}"></div>` : '');
+      const link = it.link
+        ? `<a class="built-btn" href="${it.link}" target="_blank" rel="noopener">${esc(it.linkLabel || 'Open')} ${arrowRightSVG}</a>` : '';
+      return `
+        <article class="built-row reveal">
+          ${media}
+          <div class="built-body">
+            <span class="built-num">0${idx + 1}</span>
+            <h3 class="built-name">${esc(it.name)}</h3>
+            <p class="built-summary">${esc(it.summary)}</p>
+            ${link}
+          </div>
+        </article>`;
+    }).join('');
+    nudgeAutoplay(mount);
+    reveal();
+  };
+
+  // ---- Product pitches --------------------------------------------------
+  const renderPitches = (pitches = {}) => {
+    setText('pitches-eyebrow', pitches.eyebrow);
+    setText('pitches-title', pitches.title);
+    setText('pitches-lead', pitches.lead);
+
+    // Featured pitches — embedded live demos. Each title and the demo device
+    // itself link to the write-up (no separate "Learn more" button). A pitch is
+    // shown as a tall phone (variant "phone") or a wide Chrome window
+    // (variant "desktop"). `featured` may be a single object or an array.
+    const fmount = document.getElementById('pitch-featured');
+    const featured = Array.isArray(pitches.featured)
+      ? pitches.featured
+      : (pitches.featured ? [pitches.featured] : []);
+    if (fmount) {
+      fmount.innerHTML = featured.map((f) => {
+        const iframe = f.embed
+          ? `<iframe src="${f.embed}" title="${esc(f.name)} — interactive demo" loading="lazy" allow="autoplay" scrolling="no"></iframe>`
+          : '';
+        const title = `<h3 class="showcase-title">${f.writeup
+          ? `<a href="${f.writeup}">${esc(f.name)}</a>`
+          : esc(f.name)}</h3>`;
+        const tagline = f.tagline ? `<p class="showcase-tagline">${esc(f.tagline)}</p>` : '';
+
+        if (f.variant === 'desktop') {
+          // The embed renders its own Chrome window (bar + URL); this box just
+          // sizes, clips and shadows it — same idea as the phone bezel below.
+          const device = f.writeup
+            ? `<a class="browser-embed browser-embed-link" href="${f.writeup}" aria-label="${esc(f.name)} — read the write-up">${iframe}</a>`
+            : `<div class="browser-embed">${iframe}</div>`;
+          return `<div class="showcase showcase-desktop reveal">${title}${tagline}${device}</div>`;
+        }
+
+        // Phone variant — the iframe renders the device bezel itself.
+        const device = f.writeup
+          ? `<a class="phone-embed phone-embed-link" href="${f.writeup}" aria-label="${esc(f.name)} — read the write-up">${iframe}</a>`
+          : `<div class="phone-embed">${iframe}</div>`;
+        return `<div class="showcase showcase-phone reveal">${title}${tagline}${device}</div>`;
+      }).join('');
     }
-  
-    // Top profile
-    setText('profile-name', data.name);
-    setText('email-text', data.email);
-    setText('location-text', data.location);
-    setLink('linkedin-link', data.linkedin);
-    setLink('github-link', data.github);
-  
-    // Optional: derive subtitle from first education
-    if (data.education?.length) {
-      const uni = data.education[0];
+
+    const mount = document.getElementById('pitches-grid');
+    if (!mount) return;
+    const items = pitches.items || [];
+    mount.innerHTML = items.map((p) => {
+      const actions = [];
+      if (p.writeup) actions.push(`<a class="pitch-btn" href="${p.writeup}">Read the write-up ${arrowRightSVG}</a>`);
+      if (p.demo) actions.push(`<a class="pitch-link" href="${p.demo}" target="_blank" rel="noopener">Try the live demo ↗</a>`);
+      const actionsHtml = actions.length ? `<div class="pitch-actions">${actions.join('')}</div>` : '';
+      const inner = `
+        <span class="pitch-status">${esc(p.status || '')}</span>
+        <h3 class="pitch-name">${esc(p.name)}</h3>
+        <p class="pitch-blurb">${esc(p.blurb || '')}</p>
+        ${actionsHtml}`;
+      // Whole-card link only when there are no inner action buttons (avoids nested links).
+      if (p.link && !actions.length) {
+        return `<a class="pitch-card reveal" href="${p.link}" target="_blank" rel="noopener">${inner}</a>`;
+      }
+      return `<article class="pitch-card${actions.length ? '' : ' is-soon'} reveal">${inner}</article>`;
+    }).join('');
+    reveal();
+  };
+
+  // ---- Personal: polaroids ----------------------------------------------
+  const renderPersonal = (personal = {}) => {
+    setText('life-eyebrow', personal.eyebrow);
+    setText('life-title', personal.title);
+    setText('life-lead', personal.lead);
+    const mount = document.getElementById('polaroids');
+    if (!mount) return;
+    const tilts  = [-11, 7, -5, 9, -8, 6];      // staggered angles
+    const shifts = [18, -14, 20, -8, 14, -12];  // staggered vertical offsets (px)
+    mount.innerHTML = (personal.polaroids || []).map((p, i) => `
+      <figure class="polaroid" style="--tilt: ${tilts[i % tilts.length]}deg; --dy: ${shifts[i % shifts.length]}px;">
+        <div class="polaroid-photo"><img src="${p.img}" alt="${esc(p.caption)}" loading="lazy"></div>
+        <figcaption class="polaroid-caption">${esc(p.caption)}</figcaption>
+      </figure>`).join('');
+    reveal();
+  };
+
+  // ---- Fetch + boot -----------------------------------------------------
+  let data;
+  try {
+    const res = await fetch('resume.json', { cache: 'no-cache' });
+    data = await res.json();
+    window.__resumeData = data;
+  } catch (e) {
+    console.error('Failed to load resume.json', e);
+    return;
+  }
+
+  setText('email-text', data.email);
+  setText('location-text', data.location);
+  setLink('linkedin-link', data.linkedin);
+  setLink('github-link', data.github);
+
+  renderHero(data.hero);
+  renderStory(data.story);
+  renderBuilt(data.built);
+  renderPitches(data.pitches);
+  renderPersonal(data.personal);
+
+  reveal();
+
+  // Deep-link landing — guarantee that any navigation to a hash (e.g. #pitches)
+  // lands squarely on the section, every time. This is needed because the story
+  // section is expanded to a tall scroll height by JS *after* the browser's hash
+  // jump, and images above the target (hero, "things I've built") load later
+  // still — both push the target down and would otherwise leave us parked above
+  // it. scroll-padding-top keeps the landing clear of the sticky nav.
+  const landOnHash = () => {
+    if (!window.location.hash) return;
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (!target) return;
+    const land = () => target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    // Two frames lets the just-applied layout settle before we measure.
+    requestAnimationFrame(() => requestAnimationFrame(land));
+    // …and once more after every image/subresource has loaded, in case a late
+    // load shifts the target. Only matters on the very first paint.
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', () => requestAnimationFrame(land), { once: true });
     }
-  
-    // Sections
-    renderEducation(data.education);
-    renderExperience(data.experience);
-    renderLeadership(data.leadership);
-    renderProjects(data.projects);
-    renderAbout(data);
-  
-  })();
+  };
+
+  landOnHash();                                   // initial / cross-page load
+  window.addEventListener('hashchange', landOnHash); // back/forward, re-clicks
+})();
