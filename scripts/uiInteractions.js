@@ -9,6 +9,26 @@ const nav = document.getElementById('nav');
 const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
 
 /* ---------------------------------------------------------------------- */
+/* Mobile menu — hamburger toggles the nav-links dropdown                 */
+/* ---------------------------------------------------------------------- */
+const navToggle = document.getElementById('nav-toggle');
+if (navToggle && nav) {
+  const setMenu = (open) => {
+    nav.classList.toggle('menu-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  navToggle.addEventListener('click', () => setMenu(!nav.classList.contains('menu-open')));
+  // Tapping any link inside the dropdown closes it.
+  document.querySelectorAll('#nav-menu a').forEach((a) =>
+    a.addEventListener('click', () => setMenu(false)));
+  // Tapping outside the open menu closes it.
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('menu-open') && !nav.contains(e.target)) setMenu(false);
+  });
+}
+
+/* ---------------------------------------------------------------------- */
 /* Scroll-reveal (IntersectionObserver) — exposed for dynamic content     */
 /* ---------------------------------------------------------------------- */
 const revealObserver = new IntersectionObserver((entries) => {

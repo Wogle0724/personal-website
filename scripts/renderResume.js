@@ -78,12 +78,12 @@
       return `
         <article class="built-row reveal">
           ${media}
-          <div class="built-body">
+          <div class="built-head">
             <span class="built-num">0${idx + 1}</span>
             <h3 class="built-name">${esc(it.name)}</h3>
-            <p class="built-summary">${esc(it.summary)}</p>
-            ${link}
           </div>
+          <p class="built-summary">${esc(it.summary)}</p>
+          ${link ? `<div class="built-actions">${link}</div>` : ''}
         </article>`;
     }).join('');
     nudgeAutoplay(mount);
@@ -205,12 +205,28 @@
     const target = document.getElementById(window.location.hash.slice(1));
     if (!target) return;
     const land = () => target.scrollIntoView({ behavior: 'auto', block: 'start' });
+
+    // The deferred correction below can fire seconds after the hash navigation
+    // (the page has late-loading demo iframes + story videos). If the visitor has
+    // started scrolling on their own by then, snapping them back to the target is
+    // the "random autoscroll" bug. So we let any genuine user input cancel it.
+    // Note: we watch input events, NOT 'scroll' — scrollIntoView fires 'scroll'.
+    let cancelled = false;
+    const inputs = ['wheel', 'touchstart', 'keydown', 'pointerdown'];
+    const stopWatching = () => inputs.forEach((e) => window.removeEventListener(e, cancel));
+    function cancel() { cancelled = true; stopWatching(); }
+
     // Two frames lets the just-applied layout settle before we measure.
-    requestAnimationFrame(() => requestAnimationFrame(land));
+    requestAnimationFrame(() => requestAnimationFrame(() => { if (!cancelled) land(); }));
+
     // …and once more after every image/subresource has loaded, in case a late
-    // load shifts the target. Only matters on the very first paint.
+    // load shifts the target — but only if the visitor hasn't taken over scrolling.
     if (document.readyState !== 'complete') {
-      window.addEventListener('load', () => requestAnimationFrame(land), { once: true });
+      inputs.forEach((e) => window.addEventListener(e, cancel, { passive: true }));
+      window.addEventListener('load', () => {
+        stopWatching();
+        if (!cancelled) requestAnimationFrame(land);
+      }, { once: true });
     }
   };
 

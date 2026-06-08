@@ -10,6 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
   <link rel="stylesheet" href="styles.css">
 </head>
 <body id="top">
@@ -18,14 +23,18 @@
   <header class="nav" id="nav">
     <div class="nav-inner">
       <a class="nav-brand" href="#top">Wyatt Ogle</a>
-      <nav class="nav-links" aria-label="Section navigation">
+      <nav class="nav-links" id="nav-menu" aria-label="Section navigation">
         <a href="#story" data-nav="story">Story</a>
         <a href="#built" data-nav="built">Projects</a>
         <a href="#pitches" data-nav="pitches">Pitches</a>
         <a href="#life" data-nav="life">Life</a>
         <a href="#contact" data-nav="contact">Contact</a>
+        <a href="mailto:o.wyatt@wustl.edu" class="nav-mobile-cta">Get in touch</a>
       </nav>
       <a class="nav-cta" href="mailto:o.wyatt@wustl.edu">Get in touch</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 

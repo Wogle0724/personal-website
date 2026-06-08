@@ -160,8 +160,80 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 }
 .nav-cta:hover { background: var(--accent-press); transform: translateY(-1px); }
 
+/* Hamburger — hidden on desktop, shown on mobile */
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0 9px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform 0.25s var(--ease), opacity 0.2s ease;
+}
+/* The "Get in touch" link only appears inside the mobile dropdown */
+.nav-mobile-cta { display: none; }
+
 @media (max-width: 720px) {
-  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-cta { display: none; }
+
+  /* Give the bar a surface whenever the menu is open, even at the top */
+  .nav.menu-open {
+    background: rgba(243, 237, 226, 0.92);
+    border-bottom-color: var(--border);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+            backdrop-filter: blur(12px) saturate(140%);
+  }
+
+  /* Links collapse into a dropdown panel under the bar */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.6rem 1.5rem 1rem;
+    background: rgba(243, 237, 226, 0.97);
+    border-bottom: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+            backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 18px 40px -24px rgba(42, 33, 24, 0.5);
+  }
+  .nav.menu-open .nav-links { display: flex; }
+  .nav-links a {
+    padding: 0.65rem 0.4rem;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+  /* Show the CTA as the final, accented item in the dropdown */
+  .nav-mobile-cta {
+    display: block;
+    margin-top: 0.5rem;
+    text-align: center;
+    color: #fff !important;
+    background: var(--accent);
+    border-radius: 99px;
+    font-weight: 600;
+  }
+
+  /* Hamburger morphs into an X when the menu is open */
+  .nav.menu-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.menu-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav.menu-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
 /* ----------------------------------------------------------------------- */
@@ -177,10 +249,6 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   grid-template-columns: 1.1fr 0.9fr;
   gap: 3.5rem;
   align-items: end;
-}
-@media (max-width: 760px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .hero-photo { order: -1; max-width: 200px; }
 }
 
 .hero-title {
@@ -245,6 +313,22 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   object-position: center 22%;
   border-radius: 20px;
   border: 1px solid var(--border);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    /* Smaller top/bottom padding lifts the photo nearer the header */
+    padding: calc(var(--nav-h) + 1.25rem) 1.5rem 3rem;
+  }
+  .hero-grid { grid-template-columns: 1fr; gap: 10rem; }
+  /* Full-width photo, aligned left with the text below it */
+  .hero-photo { order: -1; max-width: none; justify-self: stretch; }
+  .hero-img {
+    max-width: none;
+    /* Wider crop — trims the top and bottom of the portrait */
+    aspect-ratio: 1 / 1;
+    object-position: center 28%;
+  }
 }
 
 /* ----------------------------------------------------------------------- */
@@ -368,10 +452,13 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 .story-dot.is-active { background: var(--accent); transform: scale(1.35); }
 
 @media (max-width: 760px) {
-  .story-viewer { height: min(76vh, 620px); }
+  /* Tighten the gap between the lead paragraph and the clip */
+  .story-lead { margin-bottom: 1rem; }
+  .story-viewer { height: min(76vh, 480px); }
   .story-clip {
     flex-direction: column;
-    gap: 1.2rem;
+    /* A touch more breathing room between the video and the year/title below */
+    gap: 2.5rem;
     text-align: center;
   }
   .story-clip-media video { max-width: 92vw; max-height: 42vh; }
@@ -410,13 +497,38 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 .built-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.6rem;
-  align-items: center;
+  grid-template-areas:
+    "media head"
+    "media summary"
+    "media actions";
+  column-gap: 2.6rem;
+  row-gap: 0;
+  align-content: center;
 }
-.built-row:nth-child(even) .built-media { order: 2; }
+.built-media { grid-area: media; align-self: center; }
+.built-head { grid-area: head; }
+.built-summary { grid-area: summary; }
+.built-actions { grid-area: actions; }
+.built-row:nth-child(even) {
+  grid-template-areas:
+    "head media"
+    "summary media"
+    "actions media";
+}
 @media (max-width: 760px) {
-  .built-row { grid-template-columns: 1fr; gap: 1.4rem; }
-  .built-row:nth-child(even) .built-media { order: 0; }
+  /* Stack: title, then description, then the demo video, then the link */
+  .built-row,
+  .built-row:nth-child(even) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "head"
+      "summary"
+      "media"
+      "actions";
+    row-gap: 0;
+  }
+  /* Space the link below the video (only rendered when there is one) */
+  .built-actions { margin-top: 1.2rem; }
 }
 
 .built-media {
@@ -750,6 +862,21 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   transform: translateY(-3px);
 }
 .contact-icon:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Mobile: keep polaroid captions on one line, spread the reach-out icons */
+@media (max-width: 640px) {
+  .polaroid-caption { white-space: nowrap; padding: 0.1rem 0 0.2rem; }
+  /* Thinner white frame so the photo itself reads larger */
+  .polaroid { padding: 0.35rem 0.35rem 0; }
+  .contact-icons {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    /* Pull the row in from the edges: buttons sit closer, more centered */
+    padding: 0 2rem;
+  }
+}
 
 /* ----------------------------------------------------------------------- */
 /* Copy toast                                                              */
