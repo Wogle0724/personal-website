@@ -7,14 +7,14 @@
   "github": "https://github.com/Wogle0724",
 
   "hero": {
-    "lead": "Aspiring product manager studying CS & Economics at WashU. I turn real problems into products people actually want to use.",
+    "lead": "I turn real problems into products people actually want to use.",
     "photo": "images/friendly_casual.JPG"
   },
 
   "story": {
-    "eyebrow": "A quick tour",
-    "title": "User-centered",
-    "lead": "Obsessing over the experience someone actually touches shows up in everything I've built",
+    "eyebrow": "A brief overview",
+    "title": "UX Expert",
+    "lead": "Obsessing over user experience shows up in everything I've built",
     "clips": [
       {
         "year": "2022",
@@ -43,14 +43,14 @@
     "items": [
       {
         "name": "Proximity",
-        "summary": "A student housing marketplace to solve the broken off-campus search process, now serving 1,500 monthly users.",
+        "summary": "A student housing marketplace to solve the broken off-campus search process, now serving over 1,600 monthly users.",
         "link": "https://useproximity.org",
         "linkLabel": "Visit site",
         "video": "demo-videos/proximity-main-demo.mp4"
       },
       {
         "name": "LloydBot",
-        "summary": "An internal AI chat agent to solve the time staff lost digging through scattered company docs, now answering their questions instantly.",
+        "summary": "An internal AI chat agent to save the time lost digging through scattered company docs, instead answering their questions instantly.",
         "link": "https://github.com/Wogle0724/lpc-ai-agent",
         "linkLabel": "View on GitHub",
         "video": "demo-videos/lpc-ai-agent-demo.mp4"
@@ -78,8 +78,8 @@
         "variant": "phone"
       },
       {
-        "name": "Google · Calendar Sync",
-        "tagline": "One schedule for every you",
+        "name": "Google · Agenda AI",
+        "tagline": "An AI Agent to keep track of all your schedules",
         "embed": "https://google-calendar-sync-weld.vercel.app/?embed",
         "writeup": "google-calendar.html",
         "variant": "desktop"

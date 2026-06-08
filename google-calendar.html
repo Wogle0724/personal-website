@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Google · Calendar Sync — a concept feature pitch by Wyatt Ogle: one Master Schedule across every Google account, watched by an AI agent, with a working interactive desktop demo.">
-  <title>Google · Calendar Sync — Product Pitch · Wyatt Ogle</title>
+  <meta name="description" content="Google · AgendaAI — a concept feature pitch by Wyatt Ogle: AgendaAI reads your whole schedule across every Google account and finds the time you're looking for, or makes it. With a working interactive desktop demo.">
+  <title>Google · AgendaAI — Product Pitch · Wyatt Ogle</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
   <!-- Slim top bar: back to portfolio -->
   <header class="wp-nav">
     <div class="wp-nav-inner">
-      <a class="wp-back" href="index.html#pitches">
+      <a class="wp-back" href="index.html">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         Back to portfolio
       </a>
@@ -28,26 +28,47 @@
     <article class="cs">
 
       <header class="cs-head">
-        <h1 class="cs-title">Google · Calendar Sync</h1>
+        <h1 class="cs-title">Google · AgendaAI</h1>
         <p class="cs-date">June 2026</p>
       </header>
 
       <section class="cs-section">
         <h2>Problem</h2>
         <ul>
-          <li><strong>Most people don't have one life.</strong> They have several, split across several Google accounts. Each comes with its own calendar and its own tasks, and there's no native way to see them together.</li>
-          <li><strong>Manual cross-posting.</strong> Keeping an event visible everywhere means inviting yourself, copying details by hand, and cleaning up duplicates later.</li>
-          <li><strong>No single source of truth.</strong> To answer "am I free Thursday?" you check two or three calendars in two or three tabs — and even then, <em>you</em> are the one who has to notice the conflict.</li>
-          <li>Your time is one thing, but your calendars treat it as many — and the job of managing them falls entirely on you.</li>
+          <li><strong>Planning your day shouldn't be a chore.</strong> Figuring out what fits where eats up the time you were trying to make room for in the first place.</li>
+          <li><strong>It's easy to double-book yourself.</strong> When your life is split across this many calendars, two things land on the same hour before you ever see them collide.</li>
+          <li><strong>Your free time is fragmented.</strong> 30 minutes here, an hour there, never quite enough in one place. So you cram the thing that mattered into a too-short gap, or you skip it.</li>
         </ul>
+
+        <!-- How it works today: your life is split across separate calendars, so
+             a sneaky Zoom call lands on an hour that's already taken — and you
+             don't catch the double-book because it's buried in a calendar you
+             don't keep open. -->
+        <figure class="cs-flow cs-cals-fig">
+          <figcaption class="cs-flow-label">How it works today</figcaption>
+          <div class="cs-cals">
+            <div class="cs-cal">
+              <span class="cs-cal-tag cs-cal-tag--personal">Personal</span>
+              <div class="cs-cal-media">
+                <img src="images/calendar-problem/personal.png" alt="A personal Google Calendar for the week — gym, dentist, meals, coffee with friends and family dinners. The calendar where you track your whole life." loading="lazy">
+              </div>
+            </div>
+            <div class="cs-cal">
+              <span class="cs-cal-tag cs-cal-tag--professional">Professional</span>
+              <div class="cs-cal-media">
+                <img src="images/calendar-problem/professional.png" alt="A separate professional Google Calendar for the same week. On Thursday a sneaky Zoom client call has been accepted onto the same 1 PM hour as a design review — the two events are stacked and ringed in red, a double-book you'd never catch because it lives in a calendar you don't keep open." loading="lazy">
+              </div>
+            </div>
+          </div>
+        </figure>
       </section>
 
       <section class="cs-section">
-        <h2>Proposed Solution — Master Schedule & AgendaAI</h2>
+        <h2>Proposed Solution — AgendaAI</h2>
         <ul>
-          <li><strong>See everything in one view.</strong> Connect your Google accounts and view all of your calendars in one place. Easier to view, easier to manage.</li>
-          <li><strong>An AI assistant.</strong> AgendaAI knows your schedule and speaks up before a mistake happens. You decide how much it sees; the more you grant, the more it can protect.</li>
-          <li><strong>It reaches across accounts that can't see each other.</strong> A conflict hiding on your <em>personal</em> calendar gets caught while you're replying from your <em>work</em></li>
+          <li><strong>It knows your entire schedule.</strong> Connect each Google account once and AgendaAI reads them all in parallel — School, Personal, Professional.</li>
+          <li><strong>It finds time — and makes more.</strong> Ask in plain language: <em>"When can I study?"</em> It scans every calendar for the real openings, and when they're too fragmented to use, proposes small adjustments.</li>
+          <li><strong>It catches what you'd miss.</strong> AgendaAI knows when you're free and when you're not and it will flag conflicts before you agree to them.</li>
         </ul>
       </section>
 
@@ -71,7 +92,7 @@
   </main>
 
   <footer class="site-footer">
-    <p style="margin-top:0.6rem;">Designed &amp; built by Wyatt Ogle · 2026 · Calendar Sync is a product-pitch concept, not affiliated with Google.</p>
+    <p style="margin-top:0.6rem;">Designed &amp; built by Wyatt Ogle · 2026 · AgendaAI is a product-pitch concept, not affiliated with Google.</p>
   </footer>
 
   <!-- Vercel Web Analytics -->

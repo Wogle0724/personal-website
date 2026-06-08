@@ -545,7 +545,8 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;   /* sit the devices on a common baseline */
+  align-items: flex-start;   /* line columns up at the top: titles and demos share
+                                a top edge, so the taller phone simply hangs lower */
   gap: 3rem 5.5rem;
   margin-bottom: 3rem;
 }
@@ -984,6 +985,48 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   .cs-flow-arrow { transform: rotate(90deg); }
   .cs-flow-steps { flex-direction: column; align-items: center; }
   .cs-shot { width: min(72vw, 240px); flex: 0 0 auto; }
+}
+
+/* "How it works today" for Calendar — your Personal calendar beside a separate
+   Professional one, where a Zoom call is double-booked on an hour you can't see. */
+.cs-cals {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.cs-cal {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+}
+@media (max-width: 700px) {
+  .cs-cals { flex-direction: column; }
+}
+.cs-cal-tag {
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 500px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+}
+/* Tag colors mirror each account's signature strip in the screenshots. */
+.cs-cal-tag--personal     { background: #0b8043; }
+.cs-cal-tag--professional { background: #f9ab00; }
+.cs-cal-media {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px -18px rgba(42, 33, 24, 0.45);
+}
+.cs-cal-media img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Embedded live demo — the final section */
