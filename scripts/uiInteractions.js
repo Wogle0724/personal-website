@@ -76,6 +76,43 @@ const spy = new IntersectionObserver((entries) => {
 sections.forEach((s) => spy.observe(s));
 
 /* ---------------------------------------------------------------------- */
+/* Demo iframes — stop them from hijacking scroll                         */
+/* The featured pitches embed cross-origin live apps. When one of them     */
+/* moves focus into itself (an autofocused field, a media element, an      */
+/* in-app route change), the browser scrolls that iframe into view —       */
+/* yanking the whole page down to the pitches, seemingly at random. We     */
+/* undo that jump, *unless* the visitor actually clicked into the demo.    */
+(() => {
+  const isDemo = (el) =>
+    el && el.tagName === 'IFRAME' && el.closest('.phone-embed, .browser-embed');
+
+  let restingY = window.scrollY;
+  let lastDemoClick = 0;
+
+  // While the page itself holds focus, the current scroll is the user's intent.
+  window.addEventListener('scroll', () => {
+    if (!isDemo(document.activeElement)) restingY = window.scrollY;
+  }, { passive: true });
+
+  // A genuine click into a demo is intentional — let that focus stand.
+  document.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.phone-embed, .browser-embed')) lastDemoClick = Date.now();
+  }, true);
+
+  // Focus jumping into a demo with no recent click = a steal. Snap back.
+  // hasFocus() stays true for an in-page focus-steal but false on a tab switch,
+  // so this never fights the visitor leaving and returning to the tab.
+  window.addEventListener('blur', () => {
+    requestAnimationFrame(() => {
+      if (document.hasFocus() && isDemo(document.activeElement) &&
+          Date.now() - lastDemoClick > 600) {
+        window.scrollTo(0, restingY);
+      }
+    });
+  });
+})();
+
+/* ---------------------------------------------------------------------- */
 /* "Show, don't tell" — pinned scroll story                               */
 /* The section is made tall; an inner panel sticks to the viewport while  */
 /* we crossfade between clips based on how far we've scrolled through it.  */
