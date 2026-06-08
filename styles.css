@@ -868,13 +868,14 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   .polaroid-caption { white-space: nowrap; padding: 0.1rem 0 0.2rem; }
   /* Thinner white frame so the photo itself reads larger */
   .polaroid { padding: 0.35rem 0.35rem 0; }
+  /* Wider side margins on the whole section keep the heading and icons
+     left-aligned together; the icons then space equally across that width */
+  .contact { padding-left: 2.75rem; padding-right: 2.75rem; }
   .contact-icons {
     width: 100%;
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: 0.5rem;
-    /* Pull the row in from the edges: buttons sit closer, more centered */
-    padding: 0 2rem;
   }
 }
 
