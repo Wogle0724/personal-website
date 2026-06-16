@@ -78,6 +78,13 @@
         "variant": "phone"
       },
       {
+        "name": "Apple · Smart Plans",
+      "tagline": "Make plans quicker and smarter",
+        "embed": "https://apple-spart-planner.vercel.app/?embed",
+        "writeup": "smart-plans.html",
+        "variant": "phone"
+      },
+      {
         "name": "Google · Agenda AI",
         "tagline": "An AI Agent to keep track of all your schedules",
         "embed": "https://google-calendar-sync-weld.vercel.app/?embed",

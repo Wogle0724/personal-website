@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apple · Smart Plans — a concept feature pitch by Wyatt Ogle: an Apple Intelligence feature that reads your group chat, waits for the plan to land, and puts it on your calendar in one tap. With a working interactive iPhone demo.">
+  <title>Apple · Smart Plans — Product Pitch · Wyatt Ogle</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+
+  <!-- Slim top bar: back to portfolio -->
+  <header class="wp-nav">
+    <div class="wp-nav-inner">
+      <a class="wp-back" href="index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to portfolio
+      </a>
+    </div>
+  </header>
+
+  <main class="wp-main">
+    <article class="cs">
+
+      <header class="cs-head">
+        <h1 class="cs-title">Apple · Smart Plans</h1>
+        <p class="cs-date">June 2026</p>
+      </header>
+
+      <section class="cs-section">
+        <h2>Problem</h2>
+        <ul>
+          <li><strong>Plans are made in the group chat — and die there.</strong> The place a plan gets decided is the one place designed to scroll away, so by the weekend nobody remembers the time.</li>
+          <li><strong>Saving it is a chore, and it's yours alone.</strong> You'd have to spot the right message out of a dozen, after the plan settled, and add it by hand — separately, for each person. So nobody does.</li>
+          <li><strong>The little commitments vanish too.</strong> "I'll grab drinks," "can you bring the speaker?" — real promises made in passing, written down nowhere.</li>
+        </ul>
+      </section>
+
+      <section class="cs-section">
+        <h2>Proposed Solution — Smart Plans</h2>
+        <ul>
+          <li><strong>You tap Smart Plans, and it drafts the plan for you.</strong> Apple Intelligence reads the whole thread on-device and pulls the day, time, and place the group landed on out of a dozen scattered messages — handing you one clean event, drafted and ready to send.</li>
+          <li><strong>One tap, and it's only for you.</strong> A quiet "Add to your calendar?" card drops the event onto your Calendar and the prep onto your Reminders — privately, with no shared list to set up.</li>
+          <li><strong>It catches commitments and keeps up.</strong> Promises become private reminders timed to the event, and when the plan moves — "push to 8?" — one tap updates it.</li>
+        </ul>
+      </section>
+
+      <!-- Demo at the end, with a link back to the portfolio -->
+      <section class="cs-section cs-demo" id="demo">
+        <div class="cs-demo-frame">
+          <iframe src="https://apple-spart-planner.vercel.app/" title="Apple Smart Plans interactive prototype" loading="lazy"></iframe>
+          <a class="cs-demo-open" href="https://apple-spart-planner.vercel.app/" target="_blank" rel="noopener" aria-label="Open the demo in a new tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+        <div class="cs-demo-foot">
+          <a class="cs-demo-cta" href="index.html#pitches">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            View Other Products
+          </a>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p style="margin-top:0.6rem;">Designed &amp; built by Wyatt Ogle · 2026 · Smart Plans is a product-pitch concept, not affiliated with Apple.</p>
+  </footer>
+
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () {
+      (window.vaq = window.vaq || []).push(arguments);
+    };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
