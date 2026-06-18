@@ -98,10 +98,10 @@
   "personal": {
     "eyebrow": "Outside the work",
     "title": "The rest of me",
-    "lead": "When I'm not shipping, you'll find me on a baseball field, a mountain, or a BJJ mat — usually with these people.",
+    "lead": "When I'm not working, you'll find me on a baseball field, a mountain, or a BJJ mat - usually with these people.",
     "polaroids": [
       { "img": "images/mirror_selfie.jpg", "caption": "Me" },
-      { "img": "images/friends.jpg", "caption": "Me + Friends" },
+      { "img": "images/bjj.jpeg", "caption": "Jiu-Jitsu" },
       { "img": "images/baseball.jpg", "caption": "Baseball" },
       { "img": "images/skiing.JPEG", "caption": "Skiing" },
       { "img": "images/sister.jpg", "caption": "Me + Sister" }
