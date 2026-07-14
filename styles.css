@@ -579,7 +579,7 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 /* ----------------------------------------------------------------------- */
 .pitches-lead {
   max-width: var(--maxw-text);
-  margin: 0 0 3.6rem;
+  margin: 0 0 4.6rem;
   color: var(--text-2);
   font-size: 1.05rem;
 }
@@ -687,6 +687,52 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 .showcase-title a:hover {
   color: var(--accent);
 }
+/* Per-brand tints: only the vendor's name is styled in its own identity; the
+   product-concept half keeps the default title color. On hover the concept half
+   stays put (no accent flip) and the brand mark deepens within its own palette. */
+.showcase-title--spotify a:hover,
+.showcase-title--apple a:hover,
+.showcase-title--google a:hover { color: var(--text); }
+
+/* Spotify — solid brand green that eases to a deeper green on hover. */
+.showcase-title--spotify .brand-name {
+  color: #1db954;
+  transition: color 0.28s ease;
+}
+.showcase-title--spotify a:hover .brand-name { color: #0f8a3c; }
+
+/* Apple — the Apple Intelligence sweep from the pitch, painted onto the text.
+   On hover the gradient slides across the letters and intensifies. */
+.showcase-title--apple .brand-name {
+  background: linear-gradient(115deg, #2aa3ff, #5e5ce6 32%, #bf5af2 58%, #ff6482 80%, #ff9f0a);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 0.55s ease, filter 0.28s ease;
+}
+.showcase-title--apple a:hover .brand-name {
+  background-position: 100% 50%;
+  filter: saturate(1.45) brightness(1.06);
+}
+
+/* Google — each letter painted in the logo's color sequence (blue, red,
+   yellow, blue, green, red), cycling every 6 so it holds for any length. On
+   hover the same six colors snap into a fixed arrangement rotated one position
+   along, so every letter lands on a color different from its resting one. */
+.showcase-title--google .brand-name span:nth-child(6n + 1) { color: #4285f4; }
+.showcase-title--google .brand-name span:nth-child(6n + 2) { color: #ea4335; }
+.showcase-title--google .brand-name span:nth-child(6n + 3) { color: #fbbc05; }
+.showcase-title--google .brand-name span:nth-child(6n + 4) { color: #4285f4; }
+.showcase-title--google .brand-name span:nth-child(6n + 5) { color: #34a853; }
+.showcase-title--google .brand-name span:nth-child(6n + 6) { color: #ea4335; }
+.showcase-title--google a:hover .brand-name span:nth-child(6n + 1) { color: #ea4335; }
+.showcase-title--google a:hover .brand-name span:nth-child(6n + 2) { color: #4285f4; }
+.showcase-title--google a:hover .brand-name span:nth-child(6n + 3) { color: #ea4335; }
+.showcase-title--google a:hover .brand-name span:nth-child(6n + 4) { color: #fbbc05; }
+.showcase-title--google a:hover .brand-name span:nth-child(6n + 5) { color: #4285f4; }
+.showcase-title--google a:hover .brand-name span:nth-child(6n + 6) { color: #34a853; }
 .showcase-tagline {
   max-width: 420px;
   margin: 0 0 1.6rem;

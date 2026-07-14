@@ -19,19 +19,19 @@
       {
         "year": "2022",
         "title": "Twitch streaming",
-        "caption": "Hand-designed overlays, alerts, and branding in Illustrator.",
+        "caption": "Hand-designed overlays, alerts, and branding.",
         "video": "clips/stream-clip.mp4"
       },
       {
         "year": "2025",
         "title": "LloydBot",
-        "caption": "An internal AI agent with a chat UI people actually enjoyed using.",
+        "caption": "An internal AI agent with an intuitive chat UI.",
         "video": "clips/lloydbot-clip.mp4"
       },
       {
         "year": "2026",
         "title": "Proximity",
-        "caption": "A student-housing marketplace you navigate by conversation. The whole search collapsed into one seamless flow.",
+        "caption": "A student-housing marketplace with a matchmaking chatbot.",
         "video": "clips/prox-clip.mp4"
       }
     ]
@@ -68,7 +68,7 @@
   "pitches": {
     "eyebrow": "On the side",
     "title": "Product pitches",
-    "lead": "When I find an issue with a product I love, I can't help but try to fix it. Here are some examples.",
+    "lead": "When I love a product, I can't help but try to improve it. Here are some examples.",
     "featured": [
       {
         "name": "Spotify · Build Mode",
@@ -78,17 +78,17 @@
         "variant": "phone"
       },
       {
-        "name": "Apple · Smart Plans",
-      "tagline": "Make plans quicker and smarter",
+        "name": "Apple · Threads Intelligence",
+        "tagline": "Catch up on what you missed",
         "embed": "https://apple-spart-planner.vercel.app/?embed",
-        "writeup": "smart-plans.html",
+        "writeup": "apple.html",
         "variant": "phone"
       },
       {
         "name": "Google · Agenda AI",
         "tagline": "An AI Agent to keep track of all your schedules",
         "embed": "https://google-calendar-sync-weld.vercel.app/?embed",
-        "writeup": "google-calendar.html",
+        "writeup": "google.html",
         "variant": "desktop"
       }
     ],

@@ -109,9 +109,20 @@
         const iframe = f.embed
           ? `<iframe src="${f.embed}" title="${esc(f.name)} — interactive demo" loading="lazy" allow="autoplay" scrolling="no"></iframe>`
           : '';
-        const title = `<h3 class="showcase-title">${f.writeup
-          ? `<a href="${f.writeup}">${esc(f.name)}</a>`
-          : esc(f.name)}</h3>`;
+        // Tint only the vendor's name (the part before the "·") in its brand
+        // style; the product-concept half keeps the default title color. Google
+        // gets per-letter spans so CSS can paint each letter like its logo.
+        const [brandRaw, ...restParts] = f.name.split('·');
+        const brandName = brandRaw.trim();
+        const brand = brandName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const rest = restParts.length ? ` · ${restParts.join('·').trim()}` : '';
+        const brandInner = brand === 'google'
+          ? [...brandName].map((ch) => `<span>${esc(ch)}</span>`).join('')
+          : esc(brandName);
+        const label = `<span class="brand-name">${brandInner}</span>${esc(rest)}`;
+        const title = `<h3 class="showcase-title showcase-title--${brand}">${f.writeup
+          ? `<a href="${f.writeup}">${label}</a>`
+          : label}</h3>`;
         const tagline = f.tagline ? `<p class="showcase-tagline">${esc(f.tagline)}</p>` : '';
 
         if (f.variant === 'desktop') {
