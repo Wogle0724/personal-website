@@ -80,14 +80,14 @@
       {
         "name": "Apple · Threads Intelligence",
         "tagline": "Catch up on what you missed",
-        "embed": "https://apple-spart-planner.vercel.app/?embed",
+        "embed": "https://apple-threads-ai.vercel.app/?embed",
         "writeup": "apple.html",
         "variant": "phone"
       },
       {
         "name": "Google · Agenda AI",
         "tagline": "An AI Agent to keep track of all your schedules",
-        "embed": "https://google-calendar-sync-weld.vercel.app/?embed",
+        "embed": "https://google-agenda-ai.vercel.app/?embed",
         "writeup": "google.html",
         "variant": "desktop"
       }
