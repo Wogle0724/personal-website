@@ -118,7 +118,7 @@ sections.forEach((s) => spy.observe(s));
 /* we crossfade between clips based on how far we've scrolled through it.  */
 /* ---------------------------------------------------------------------- */
 window.initStoryScroll = function (numClips) {
-  const section = document.getElementById('story');
+  const section = document.querySelector('.story');
   const clips = Array.from(document.querySelectorAll('.story-clip'));
   const dots = Array.from(document.querySelectorAll('.story-dot'));
   if (!section || !clips.length || !numClips) return;

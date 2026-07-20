@@ -14,14 +14,6 @@
 
   const arrowRightSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
 
-  const nudgeAutoplay = (root) => {
-    root.querySelectorAll('video[autoplay]').forEach((v) => {
-      const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
-      tryPlay();
-      v.addEventListener('canplay', tryPlay, { once: true });
-    });
-  };
-
   // ---- Hero -------------------------------------------------------------
   const renderHero = (hero = {}) => {
     setText('hero-lead', hero.lead);
@@ -39,19 +31,33 @@
     if (!viewer) return;
     const clips = story.clips || [];
 
-    viewer.innerHTML = clips.map((c, i) => `
+    viewer.innerHTML = clips.map((c, i) => {
+      const link = c.link
+        ? `<a class="built-btn" href="${c.link}" target="_blank" rel="noopener">${esc(c.linkLabel || 'Open')} ${arrowRightSVG}</a>`
+        : '';
+      const features = (c.features || []).length
+        ? `<ul class="story-clip-tags">${c.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`
+        : '';
+      // Long project names (e.g. the Workday → Calendar converter) get a smaller
+      // title so they don't dominate the clip.
+      const nameClass = (c.title || '').length > 22 ? ' story-clip-name--sm' : '';
+      return `
       <div class="story-clip${i === 0 ? ' is-active' : ''}" data-index="${i}">
-        <div class="story-clip-media">
-          ${c.video
-            ? `<video src="${c.video}" muted loop playsinline preload="metadata" aria-hidden="true"></video>`
-            : `<div class="story-clip-placeholder">Clip coming soon</div>`}
+        <div class="story-clip-row">
+          <div class="story-clip-media">
+            ${c.video
+              ? `<video src="${c.video}" muted loop playsinline preload="metadata" aria-hidden="true"></video>`
+              : `<div class="story-clip-placeholder">Clip coming soon</div>`}
+          </div>
+          <div class="story-clip-info">
+            <h3 class="story-clip-name${nameClass}">${esc(c.title)}</h3>
+            <p class="story-clip-caption">${esc(c.caption)}</p>
+            ${features}
+            ${link ? `<div class="story-clip-actions">${link}</div>` : ''}
+          </div>
         </div>
-        <div class="story-clip-info">
-          <span class="story-clip-year">${esc(c.year)}</span>
-          <h3 class="story-clip-name">${esc(c.title)}</h3>
-          <p class="story-clip-caption">${esc(c.caption)}</p>
-        </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
 
     if (progress) {
       progress.innerHTML = clips.map((_, i) =>
@@ -60,34 +66,6 @@
 
     // Hand the section off to the scroll controller in uiInteractions.js
     if (typeof window.initStoryScroll === 'function') window.initStoryScroll(clips.length);
-  };
-
-  // ---- Things I've built ------------------------------------------------
-  const renderBuilt = (built = {}) => {
-    setText('built-eyebrow', built.eyebrow);
-    setText('built-title', built.title);
-    const mount = document.getElementById('built-list');
-    if (!mount) return;
-    const items = built.items || [];
-    mount.innerHTML = items.map((it, idx) => {
-      const media = it.video
-        ? `<div class="built-media"><video src="${it.video}" muted loop autoplay playsinline preload="metadata" aria-hidden="true"></video></div>`
-        : (it.img ? `<div class="built-media"><img src="${it.img}" alt="${esc(it.name)}"></div>` : '');
-      const link = it.link
-        ? `<a class="built-btn" href="${it.link}" target="_blank" rel="noopener">${esc(it.linkLabel || 'Open')} ${arrowRightSVG}</a>` : '';
-      return `
-        <article class="built-row reveal">
-          ${media}
-          <div class="built-head">
-            <span class="built-num">0${idx + 1}</span>
-            <h3 class="built-name">${esc(it.name)}</h3>
-          </div>
-          <p class="built-summary">${esc(it.summary)}</p>
-          ${link ? `<div class="built-actions">${link}</div>` : ''}
-        </article>`;
-    }).join('');
-    nudgeAutoplay(mount);
-    reveal();
   };
 
   // ---- Product pitches --------------------------------------------------
@@ -199,7 +177,6 @@
 
   renderHero(data.hero);
   renderStory(data.story);
-  renderBuilt(data.built);
   renderPitches(data.pitches);
   renderPersonal(data.personal);
 

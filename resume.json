@@ -12,52 +12,30 @@
   },
 
   "story": {
-    "eyebrow": "A brief overview",
-    "title": "User-First",
+    "eyebrow": "Projects",
+    "title": "Some of my work",
     "lead": "Across everything I build, the experience comes first.",
     "clips": [
       {
-        "year": "2022",
-        "title": "Twitch streaming",
-        "caption": "Hand-designed overlays, alerts, and branding.",
-        "video": "clips/stream-clip.mp4"
-      },
-      {
-        "year": "2025",
-        "title": "LloydBot",
-        "caption": "An internal AI agent with an intuitive chat UI.",
-        "video": "clips/lloydbot-clip.mp4"
-      },
-      {
-        "year": "2026",
         "title": "Proximity",
-        "caption": "A student-housing marketplace with a matchmaking chatbot.",
-        "video": "clips/prox-clip.mp4"
-      }
-    ]
-  },
-
-  "built": {
-    "eyebrow": "Projects",
-    "title": "Some of my work",
-    "items": [
-      {
-        "name": "Proximity",
-        "summary": "A student housing marketplace to solve the broken off-campus search process, now serving over 1,600 monthly users.",
+        "caption": "A student housing marketplace, now serving over 1,600 monthly users.",
+        "features": ["RAG", "Node.js", "PostgreSQL"],
         "link": "https://useproximity.org",
         "linkLabel": "Visit site",
         "video": "demo-videos/proximity-main-demo.mp4"
       },
       {
-        "name": "LloydBot",
-        "summary": "An internal AI chat agent to save the time lost digging through scattered company docs, instead answering their questions instantly.",
+        "title": "LloydBot",
+        "caption": "An internal AI agent that instantly answers questions from company docs.",
+        "features": ["RAG", "Ruby on Rails", "JS"],
         "link": "https://github.com/Wogle0724/lpc-ai-agent",
         "linkLabel": "View on GitHub",
         "video": "demo-videos/lpc-ai-agent-demo.mp4"
       },
       {
-        "name": "Workday to Google Calendar Converter",
-        "summary": "A one-click import tool to solve the tedious manual copying of class schedules, currently used by 200+ students every semester.",
+        "title": "Workday to Google Calendar Converter",
+        "caption": "A one-click tool that imports class schedules, used by 200+ students.",
+        "features": ["JavaScript", "Google Calendar API", "Vercel"],
         "link": "https://github.com/Wogle0724/workday-to-google-calendar",
         "linkLabel": "View on GitHub",
         "video": "demo-videos/workday-to-google-demo.mp4"
