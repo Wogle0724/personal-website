@@ -133,8 +133,19 @@ window.initStoryScroll = function (numClips) {
 
   section.classList.add('story-dynamic');
   // Each clip "sticks" for a long stretch of scroll before the next one hits.
+  // The middle clip gets extra weight — it sat in the crossfire between its two
+  // neighbours and was easy to scroll straight past.
   const PER_CLIP_VH = 135;
-  section.style.height = (numClips * PER_CLIP_VH + 40) + 'vh';
+  const MIDDLE_WEIGHT = 2;
+  const middleIdx = numClips >= 3 ? Math.floor((numClips - 1) / 2) : -1;
+  const weights = Array.from({ length: numClips }, (_, i) =>
+    i === middleIdx ? MIDDLE_WEIGHT : 1
+  );
+  const totalWeight = weights.reduce((a, b) => a + b, 0);
+  // Where each clip hands off to the next, as a 0–1 fraction of the scroll.
+  const bounds = [];
+  weights.reduce((acc, w) => { const next = acc + w / totalWeight; bounds.push(next); return next; }, 0);
+  section.style.height = (totalWeight * PER_CLIP_VH + 40) + 'vh';
 
   const setActiveVideo = (idx) => {
     clips.forEach((c, i) => {
@@ -158,9 +169,8 @@ window.initStoryScroll = function (numClips) {
     let t = scrollLen > 0 ? (-rect.top) / scrollLen : 0;
     t = Math.max(0, Math.min(1, t));
 
-    let idx = Math.floor(t * numClips);
-    if (idx >= numClips) idx = numClips - 1;
-    if (idx < 0) idx = 0;
+    let idx = bounds.findIndex((b) => t < b);
+    if (idx < 0) idx = numClips - 1;
     if (idx === currentIdx) return;
     currentIdx = idx;
 
