@@ -57,8 +57,8 @@
       <!-- Demo at the end, with a link back to the portfolio -->
       <section class="cs-section cs-demo" id="demo">
         <div class="cs-demo-frame">
-          <iframe src="https://apple-spart-planner.vercel.app/" title="Apple Threads Intelligence interactive prototype" loading="lazy"></iframe>
-          <a class="cs-demo-open" href="https://apple-spart-planner.vercel.app/" target="_blank" rel="noopener" aria-label="Open the demo in a new tab">
+          <iframe src="https://apple-threads-ai.vercel.app/" title="Apple Threads Intelligence interactive prototype" loading="lazy"></iframe>
+          <a class="cs-demo-open" href="https://apple-threads-ai.vercel.app/" target="_blank" rel="noopener" aria-label="Open the demo in a new tab">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>
         </div>
@@ -76,6 +76,10 @@
   <footer class="site-footer">
     <p style="margin-top:0.6rem;">Designed &amp; built by Wyatt Ogle · 2026 · Threads Intelligence is a product-pitch concept, not affiliated with Apple.</p>
   </footer>
+
+  <!-- Park the demo embed while it is off screen (stops it stealing focus
+       and scrolling the page). -->
+  <script src="scripts/demoFrames.js" defer></script>
 
   <!-- Vercel Web Analytics -->
   <script>

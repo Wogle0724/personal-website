@@ -77,39 +77,33 @@ sections.forEach((s) => spy.observe(s));
 
 /* ---------------------------------------------------------------------- */
 /* Demo iframes — stop them from hijacking scroll                         */
-/* The featured pitches embed cross-origin live apps. When one of them     */
-/* moves focus into itself (an autofocused field, a media element, an      */
-/* in-app route change), the browser scrolls that iframe into view —       */
-/* yanking the whole page down to the pitches, seemingly at random. We     */
-/* undo that jump, *unless* the visitor actually clicked into the demo.    */
+/* The featured pitches embed cross-origin live apps that run a scripted     */
+/* auto-demo. When one focuses a field inside itself, the browser scrolls    */
+/* that iframe into view — yanking the whole page down, seemingly at random. */
+/* demoFrames.js parks off-screen demos so this can't happen at any real     */
+/* distance; this is the backstop for a demo sitting just past the fold.     */
 (() => {
   const isDemo = (el) =>
     el && el.tagName === 'IFRAME' && el.closest('.phone-embed, .browser-embed');
 
   let restingY = window.scrollY;
-  let lastDemoClick = 0;
+  let lastInput = 0;
+  ['wheel', 'touchstart', 'touchmove', 'keydown', 'pointerdown'].forEach((evt) =>
+    window.addEventListener(evt, () => { lastInput = Date.now(); },
+      { capture: true, passive: true }));
 
-  // While the page itself holds focus, the current scroll is the user's intent.
+  // Any scroll the visitor drove is their intent — remember it. A jump nothing
+  // they did explains, while a demo holds focus, is the iframe pulling itself
+  // into view: put the page back. Note we watch 'scroll', not 'blur' — the
+  // browser performs that scroll *after* the blur event, so a blur handler
+  // corrects a position it hasn't lost yet and the jump wins.
   window.addEventListener('scroll', () => {
-    if (!isDemo(document.activeElement)) restingY = window.scrollY;
+    const stolen = isDemo(document.activeElement) &&
+                   Date.now() - lastInput > 700 &&
+                   Math.abs(window.scrollY - restingY) > 120;
+    if (stolen) window.scrollTo(0, restingY);
+    else restingY = window.scrollY;
   }, { passive: true });
-
-  // A genuine click into a demo is intentional — let that focus stand.
-  document.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('.phone-embed, .browser-embed')) lastDemoClick = Date.now();
-  }, true);
-
-  // Focus jumping into a demo with no recent click = a steal. Snap back.
-  // hasFocus() stays true for an in-page focus-steal but false on a tab switch,
-  // so this never fights the visitor leaving and returning to the tab.
-  window.addEventListener('blur', () => {
-    requestAnimationFrame(() => {
-      if (document.hasFocus() && isDemo(document.activeElement) &&
-          Date.now() - lastDemoClick > 600) {
-        window.scrollTo(0, restingY);
-      }
-    });
-  });
 })();
 
 /* ---------------------------------------------------------------------- */
@@ -212,3 +206,49 @@ window.copyPhone = function () {
     window.location.href = 'tel:' + phone;
   }
 };
+
+/* ---------------------------------------------------------------------- */
+/* Mobile: tapping a project title opens a popup to visit its link.        */
+/* (The inline "Visit site / View on GitHub" button is hidden on mobile.)  */
+/* ---------------------------------------------------------------------- */
+(function () {
+  const isMobile = () => window.matchMedia('(max-width: 760px)').matches;
+  let popup;
+
+  const closePopup = () => { if (popup) popup.classList.remove('is-open'); };
+
+  const buildPopup = () => {
+    popup = document.createElement('div');
+    popup.className = 'link-popup';
+    popup.innerHTML =
+      '<div class="link-popup-backdrop"></div>' +
+      '<div class="link-popup-card" role="dialog" aria-modal="true">' +
+        '<p class="link-popup-title"></p>' +
+        '<a class="link-popup-go" target="_blank" rel="noopener"></a>' +
+        '<button type="button" class="link-popup-cancel">Cancel</button>' +
+      '</div>';
+    document.body.appendChild(popup);
+    popup.querySelector('.link-popup-backdrop').addEventListener('click', closePopup);
+    popup.querySelector('.link-popup-cancel').addEventListener('click', closePopup);
+    popup.querySelector('.link-popup-go').addEventListener('click', closePopup);
+    return popup;
+  };
+
+  const openPopup = (name, label, href) => {
+    if (!popup) buildPopup();
+    popup.querySelector('.link-popup-title').textContent = name;
+    const go = popup.querySelector('.link-popup-go');
+    go.textContent = (label || 'Open') + ' ↗';
+    go.href = href;
+    popup.classList.add('is-open');
+  };
+
+  document.addEventListener('click', (e) => {
+    const title = e.target.closest('.story-clip-name[data-link]');
+    if (!title || !isMobile()) return;
+    e.preventDefault();
+    openPopup(title.textContent, title.dataset.linkLabel, title.dataset.link);
+  });
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePopup(); });
+})();

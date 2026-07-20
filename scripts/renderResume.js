@@ -41,6 +41,12 @@
       // Long project names (e.g. the Workday → Calendar converter) get a smaller
       // title so they don't dominate the clip.
       const nameClass = (c.title || '').length > 22 ? ' story-clip-name--sm' : '';
+      // On mobile the link button is hidden; tapping the title opens a popup to
+      // the same URL. These data-attrs feed that handler (see uiInteractions.js).
+      const linkClass = c.link ? ' story-clip-name--link' : '';
+      const linkAttrs = c.link
+        ? ` data-link="${esc(c.link)}" data-link-label="${esc(c.linkLabel || 'Open')}"`
+        : '';
       return `
       <div class="story-clip${i === 0 ? ' is-active' : ''}" data-index="${i}">
         <div class="story-clip-row">
@@ -50,7 +56,7 @@
               : `<div class="story-clip-placeholder">Clip coming soon</div>`}
           </div>
           <div class="story-clip-info">
-            <h3 class="story-clip-name${nameClass}">${esc(c.title)}</h3>
+            <h3 class="story-clip-name${nameClass}${linkClass}"${linkAttrs}>${esc(c.title)}</h3>
             <p class="story-clip-caption">${esc(c.caption)}</p>
             ${features}
             ${link ? `<div class="story-clip-actions">${link}</div>` : ''}
@@ -118,6 +124,8 @@
           : `<div class="phone-embed">${iframe}</div>`;
         return `<div class="showcase showcase-phone reveal">${title}${tagline}${device}</div>`;
       }).join('');
+      // These embeds only exist now, so hand them to the off-screen parker.
+      if (typeof window.watchDemoFrames === 'function') window.watchDemoFrames();
     }
 
     const mount = document.getElementById('pitches-grid');

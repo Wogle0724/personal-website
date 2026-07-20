@@ -27,7 +27,7 @@
       {
         "title": "LloydBot",
         "caption": "An internal AI agent that instantly answers questions from company docs.",
-        "features": ["RAG", "Ruby on Rails", "JS"],
+        "features": ["RAG", "Ruby on Rails", "JavaScript"],
         "link": "https://github.com/Wogle0724/lpc-ai-agent",
         "linkLabel": "View on GitHub",
         "video": "demo-videos/lpc-ai-agent-demo.mp4"

@@ -495,6 +495,73 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
   /* Stacked on mobile — no need to stretch the specs to the video height */
   .story-clip-info { flex: 0 0 auto; justify-content: flex-start; text-align: center; }
   .story-clip-tags { justify-content: center; }
+  /* Hide the inline link button; the title itself opens a popup instead */
+  .story-clip-actions { display: none; }
+  .story-clip-name--link { cursor: pointer; }
+}
+
+/* Mobile "open this project" popup (title tap on the projects section) */
+.link-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: none;
+}
+.link-popup.is-open { display: block; }
+.link-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 33, 24, 0.45);
+}
+.link-popup-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 3rem);
+  max-width: 400px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.8rem 1.5rem;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px -24px rgba(42, 33, 24, 0.5);
+  animation: link-popup-pop 0.22s var(--ease);
+}
+@keyframes link-popup-pop {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.94); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.link-popup-title {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+}
+.link-popup-go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--accent);
+}
+.link-popup-go:active { background: var(--accent-press); }
+.link-popup-cancel {
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-2);
+  background: transparent;
 }
 
 /* Static fallback (reduced motion): just stack the clips */
@@ -1257,6 +1324,11 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 /* Embedded live demo — the final section */
 .cs-demo { margin-top: 3.4rem; }
 .cs-demo-frame {
+  /* One source of truth for the demo's height: the box holds it even while the
+     iframe is detached (see scripts/demoFrames.js), so parking an off-screen
+     demo never collapses the page under the visitor. */
+  --demo-h: min(80vh, 720px);
+  min-height: var(--demo-h);
   margin-top: 1.4rem;
   position: relative;
   border-radius: var(--radius);
@@ -1268,11 +1340,11 @@ h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; }
 .cs-demo-frame iframe {
   display: block;
   width: 100%;
-  height: min(80vh, 720px);
+  height: var(--demo-h);
   border: 0;
 }
 @media (max-width: 640px) {
-  .cs-demo-frame iframe { height: min(76vh, 600px); }
+  .cs-demo-frame { --demo-h: min(76vh, 600px); }
 }
 /* Open-in-new-tab pill, pinned to the bottom-right of the demo frame */
 .cs-demo-open {
