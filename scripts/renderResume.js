@@ -41,6 +41,9 @@
       // Long project names (e.g. the Workday → Calendar converter) get a smaller
       // title so they don't dominate the clip.
       const nameClass = (c.title || '').length > 22 ? ' story-clip-name--sm' : '';
+      // Captions are escaped, but a literal <br> is let back through so a
+      // caption can force its own line break (see resume.json).
+      const caption = esc(c.caption).replace(/&lt;br\s*\/?&gt;/gi, '<br>');
       // On mobile the link button is hidden; tapping the title opens a popup to
       // the same URL. These data-attrs feed that handler (see uiInteractions.js).
       const linkClass = c.link ? ' story-clip-name--link' : '';
@@ -57,7 +60,7 @@
           </div>
           <div class="story-clip-info">
             <h3 class="story-clip-name${nameClass}${linkClass}"${linkAttrs}>${esc(c.title)}</h3>
-            <p class="story-clip-caption">${esc(c.caption)}</p>
+            <p class="story-clip-caption">${caption}</p>
             ${features}
             ${link ? `<div class="story-clip-actions">${link}</div>` : ''}
           </div>

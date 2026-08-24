@@ -18,7 +18,7 @@
     "clips": [
       {
         "title": "Proximity",
-        "caption": "A student housing marketplace, now serving over 1,600 monthly users.",
+        "caption": "Serving 2,000+ monthly users. <br>Over 50 leases signed worth over $800k.",
         "features": ["RAG", "Node.js", "PostgreSQL"],
         "link": "https://useproximity.org",
         "linkLabel": "Visit site",
@@ -26,18 +26,14 @@
       },
       {
         "title": "LloydBot",
-        "caption": "An internal AI agent that instantly answers questions from company docs.",
+        "caption": "An internal AI agent answering company-doc questions for 100+ employees.",
         "features": ["RAG", "Ruby on Rails", "JavaScript"],
-        "link": "https://github.com/Wogle0724/lpc-ai-agent",
-        "linkLabel": "View on GitHub",
         "video": "demo-videos/lpc-ai-agent-demo.mp4"
       },
       {
         "title": "Workday to Google Calendar Converter",
-        "caption": "A one-click tool that imports class schedules, used by 200+ students.",
+        "caption": "A one-click tool that imports class schedules, used by 500+ students.",
         "features": ["JavaScript", "Google Calendar API", "Vercel"],
-        "link": "https://github.com/Wogle0724/workday-to-google-calendar",
-        "linkLabel": "View on GitHub",
         "video": "demo-videos/workday-to-google-demo.mp4"
       }
     ]

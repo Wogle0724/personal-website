@@ -136,7 +136,7 @@ window.initStoryScroll = function (numClips) {
   // The middle clip gets extra weight — it sat in the crossfire between its two
   // neighbours and was easy to scroll straight past.
   const PER_CLIP_VH = 135;
-  const MIDDLE_WEIGHT = 2;
+  const MIDDLE_WEIGHT = 1.7;
   const middleIdx = numClips >= 3 ? Math.floor((numClips - 1) / 2) : -1;
   const weights = Array.from({ length: numClips }, (_, i) =>
     i === middleIdx ? MIDDLE_WEIGHT : 1
