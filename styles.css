@@ -44,6 +44,12 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
 
+/* Hide scrollbars site-wide (scrolling still works) */
+html, body, * { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
 body {
   margin: 0;
   font-family: var(--font-sans);
